@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+
+  wordpress:
+    image: wordpress:4.9.4-php5.6-apache
+    restart: always
+    ports:
+      - 8080:80
+    volumes:
+      - .:/var/www/html/wp-content/plugins/compartir-wp
+    environment:
+      WORDPRESS_DB_PASSWORD: example
+
+  mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
