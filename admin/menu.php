@@ -101,16 +101,13 @@ if ( ! function_exists( 'compartir_wp__admin_sidebar' ) )
      */
     function compartir_wp__admin_sidebar()
     {
-        // TODO: Missing finish
-        _e( '<div class="postbox">' );
-
-        printf( '<h2><span>%s</span></h2>',
+        $html = sprintf( '<h2><span>%s</span></h2>',
             esc_attr__( 'Sidebar Content Header', COMPARTIR_WP__TEXT_DOMAIN ) );
 
-        printf( '<div class="inside"><p>%s</p></div><!-- .inside -->',
+        $html .= sprintf( '<div class="inside"><p>%s</p></div><!-- .inside -->',
             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' );
 
-        _e( '</div><!-- .postbox -->' );
+        printf( '<div class="postbox">%s</div><!-- .postbox -->', $html );
     }
 }
 

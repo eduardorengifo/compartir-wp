@@ -17,12 +17,10 @@ if ( ! function_exists( 'compartir_wp__field_checkbox' ) )
         $value = isset( $options[ $args['label_for'] ] ) ? $options[ $args['label_for'] ] : '';
         $checked = ( $value === 'on' ) ? 'checked' : '';
 
-        _e( '<fieldset>' );
-
-        printf( '<legend class="screen-reader-text"><span>%s</span></legend>',
+        $html = sprintf( '<legend class="screen-reader-text"><span>%s</span></legend>',
             $args['label_for'] );
 
-        printf( '<label for="%s"><input id="%s" name="%s" type="checkbox" %s/><span>%s</span></label>',
+        $html .= sprintf( '<label for="%s"><input id="%s" name="%s" type="checkbox" %s/><span>%s</span></label>',
             $args['label_for'],
             $args['label_for'],
             "{$args['option_name']}[{$args['label_for']}]",
@@ -30,10 +28,10 @@ if ( ! function_exists( 'compartir_wp__field_checkbox' ) )
             $args['text'] );
 
         if ( isset( $args['description'] ) ) {
-            printf( '<p class="description">%s</p>', $args['description'] );
+            $html .= sprintf( '<p class="description">%s</p>', $args['description'] );
         }
 
-        _e( '</fieldset>' );
+        printf( '<fieldset>%s</fieldset>', $html );
     }
 }
 
