@@ -22,3 +22,6 @@ require_once( COMPARTIR_WP__PLUGIN_DIR . 'inc/share.php' );
 
 // Adding utils helpers
 require_once( COMPARTIR_WP__PLUGIN_DIR . 'inc/utils.php' );
+
+// Adding admin page of settings
+require_once( COMPARTIR_WP__PLUGIN_DIR . 'admin/admin.php' );
