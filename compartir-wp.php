@@ -11,5 +11,14 @@ Text Domain:  compartir-wp
 */
 
 define( 'COMPARTIR_WP__VERSION', '1.0.0' );
+define( 'COMPARTIR_WP__NAME', 'Compartir WP' );
+define( 'COMPARTIR_WP__TEXT_DOMAIN', 'compartir-wp' );
 define( 'COMPARTIR_WP__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'COMPARTIR_WP__PLUGIN_FILE', __FILE__ );
+define( 'COMPARTIR_WP__OPTIONS', 'compartir_wp__options' );
+
+// Adding share helpers
+require_once( COMPARTIR_WP__PLUGIN_DIR . 'inc/share.php' );
+
+// Adding utils helpers
+require_once( COMPARTIR_WP__PLUGIN_DIR . 'inc/utils.php' );
