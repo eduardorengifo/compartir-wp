@@ -1,4 +1,4 @@
-=== LetrasBot ===
+=== Compartir WP ===
 Contributors: Oscar254
 Tags: Share, Bot, Facebook
 Requires at least: 4.8
