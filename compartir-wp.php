@@ -14,29 +14,26 @@ Domain Path: /languages
 define( 'COMPARTIR_WP__VERSION', '1.0.0' );
 define( 'COMPARTIR_WP__NAME', 'Compartir WP' );
 define( 'COMPARTIR_WP__TEXT_DOMAIN', 'compartir-wp' );
-define( 'COMPARTIR_WP__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+
+// Define plugin location
 define( 'COMPARTIR_WP__PLUGIN_FILE', __FILE__ );
+define( 'COMPARTIR_WP__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'COMPARTIR_WP__PLUGIN_REL_PATH', basename( dirname( __FILE__ ) ) );
+
+// Define options name
 define( 'COMPARTIR_WP__OPTIONS', 'compartir_wp__options' );
+define( 'COMPARTIR_WP__OPTIONS_GENERAL', 'compartir_wp__options_general' );
+define( 'COMPARTIR_WP__OPTIONS_FACEBOOK', 'compartir_wp__options_facebook' );
+define( 'COMPARTIR_WP__OPTIONS_TWITTER', 'compartir_wp__options_twitter' );
 
-// ----------------------------------------------------------------------------------
-
-if ( ! function_exists( 'compartir_wp__text_domain' ) )
-{
-    function compartir_wp__text_domain()
-    {
-        load_plugin_textdomain(COMPARTIR_WP__TEXT_DOMAIN, false, basename( dirname( __FILE__ ) )  . '/languages');
-    }
-}
-
-add_action( 'init', 'compartir_wp__text_domain' );
-
-// ----------------------------------------------------------------------------------
-
-// Adding share helpers
-require_once( COMPARTIR_WP__PLUGIN_DIR . 'inc/share.php' );
+// Adding actions
+require_once( COMPARTIR_WP__PLUGIN_DIR . 'inc/actions.php' );
 
 // Adding utils helpers
 require_once( COMPARTIR_WP__PLUGIN_DIR . 'inc/utils.php' );
+
+// Adding share helpers
+require_once( COMPARTIR_WP__PLUGIN_DIR . 'inc/share.php' );
 
 // Adding admin page of settings
 require_once( COMPARTIR_WP__PLUGIN_DIR . 'admin/admin.php' );
