@@ -2,23 +2,35 @@
 
 // ----------------------------------------------------------------------------------
 
-if ( ! function_exists( 'compartir_wp__on_publish_draft_post' ) )
+if ( ! function_exists( 'compartir_wp__share_post_on_twitter' ) )
 {
     /**
-     * Share New Post
+     * Share post on Twitter
      *
-     * @param WP_Post $post
+     * @param  WP_Post $post
      *
-     * @link https://codex.wordpress.org/Post_Status_Transitions
-     *
-     * @return void
+     * @return array|object
      */
-    function compartir_wp__on_publish_draft_post( $post )
+    function compartir_wp__share_post_on_twitter( $post )
     {
-        // TODO: Code for publish draft on publish post
+        $twitter_options = get_option( COMPARTIR_WP__OPTIONS_TWITTER );
+
+        $keys = array(
+            'access_token'          => $twitter_options['access_token'],
+            'access_token_secret'   => $twitter_options['access_token_secret'],
+            'consumer_key'          => $twitter_options['customer_key'],
+            'consumer_secret'       => $twitter_options['customer_secret']
+        );
+
+        $media = null;
+
+        if ( has_post_thumbnail( $post ) ) {
+            $attached_file = get_attached_file( get_post_thumbnail_id( $post ) );
+            $media = array( $attached_file );
+        }
+
+        return compartir_wp__publish_on_twitter( $keys, $post->post_title, $media );
     }
 }
-
-add_action(  'draft_to_publish',  'compartir_wp__on_publish_draft_post', 10, 1 );
 
 // ----------------------------------------------------------------------------------
