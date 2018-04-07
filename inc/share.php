@@ -35,17 +35,18 @@ if ( ! function_exists( 'compartir_wp__share_post_on_twitter' ) )
 
 // ----------------------------------------------------------------------------------
 
-if ( ! function_exists( 'compartir_wp__share_post_on_facebook_user' ) )
+if ( ! function_exists( 'compartir_wp__share_post_on_facebook' ) )
 {
     /**
-     * Share post on Facebook for user
+     * Share post on Facebook
      *
+     * @param string $id User id, example: me
      * @param WP_Post $post
      *
      * @return \Facebook\GraphNodes\GraphNode
      * @throws \Facebook\Exceptions\FacebookSDKException
      */
-    function compartir_wp__share_post_on_facebook_user( $post )
+    function compartir_wp__share_post_on_facebook( $id , $post )
     {
         $facebook_options = get_option( COMPARTIR_WP__OPTIONS_FACEBOOK );
 
@@ -59,7 +60,25 @@ if ( ! function_exists( 'compartir_wp__share_post_on_facebook_user' ) )
             'link'  => get_the_permalink( $post )
         );
 
-        return compartir_wp__publish_on_facebook( $keys, 'me', $data );
+        return compartir_wp__publish_on_facebook( $keys, $id, $data );
+    }
+}
+
+// ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__share_post_on_facebook_user' ) )
+{
+    /**
+     * Share post on Facebook for user
+     *
+     * @param WP_Post $post
+     *
+     * @return \Facebook\GraphNodes\GraphNode
+     * * @throws \Facebook\Exceptions\FacebookSDKException
+     */
+    function compartir_wp__share_post_on_facebook_user(  $post )
+    {
+        return compartir_wp__share_post_on_facebook( 'me', $post );
     }
 }
 
