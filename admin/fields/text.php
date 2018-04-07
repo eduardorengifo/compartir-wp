@@ -26,7 +26,7 @@ if ( ! function_exists( 'compartir_wp__field_text' ) )
         );
 
         if ( isset( $args['text'] ) ) {
-            printf( '%s', $args['text'] );
+            compartir_wp__e( $args['text'] );
         }
 
 		if ( isset( $args['description'] ) ) {
