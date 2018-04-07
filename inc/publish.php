@@ -7,7 +7,7 @@ if ( ! function_exists( 'compartir_wp__publish_on_twitter' ) )
     /**
      * Publish on Twitter
      *
-     * @param array[string] $keys
+     * @param array $keys
      * @param string $status
      * @param array[string] $media
      *
@@ -42,6 +42,44 @@ if ( ! function_exists( 'compartir_wp__publish_on_twitter' ) )
         }
 
         return $connection->post('statuses/update', $parameters);
+    }
+}
+
+// ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__publish_on_facebook' ) )
+{
+    /**
+     * Publish on Facebook
+     *
+     * @param array $keys
+     * @param string $id User id, example: me
+     * @param array[] $data
+     *
+     * @return \Facebook\GraphNodes\GraphNode
+     * @throws \Facebook\Exceptions\FacebookSDKException
+     */
+    function compartir_wp__publish_on_facebook( $keys, $id, $data )
+    {
+        require_once( COMPARTIR_WP__PLUGIN_DIR . 'vendor/autoload.php' );
+
+        $fb = new \Facebook\Facebook([
+            'app_id'                => $keys['app_id'],
+            'app_secret'            => $keys['app_secret'],
+            'default_graph_version' => 'v2.12',
+        ]);
+
+        try {
+            $response = $fb->post( "/{$id}/feed", $data, $keys['tocken'] );
+        } catch ( \Facebook\Exceptions\FacebookResponseException $e ) {
+            echo 'Graph returned an error: ' . $e->getMessage();
+            exit;
+        } catch ( \Facebook\Exceptions\FacebookSDKException $e ) {
+            echo 'Facebook SDK returned an error: ' . $e->getMessage();
+            exit;
+        }
+
+        return $response->getGraphNode();
     }
 }
 
