@@ -34,3 +34,33 @@ if ( ! function_exists( 'compartir_wp__share_post_on_twitter' ) )
 }
 
 // ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__share_post_on_facebook_user' ) )
+{
+    /**
+     * Share post on Facebook for user
+     *
+     * @param WP_Post $post
+     *
+     * @return \Facebook\GraphNodes\GraphNode
+     * @throws \Facebook\Exceptions\FacebookSDKException
+     */
+    function compartir_wp__share_post_on_facebook_user( $post )
+    {
+        $facebook_options = get_option( COMPARTIR_WP__OPTIONS_FACEBOOK );
+
+        $keys = array(
+            'app_id'        => $facebook_options['app_id'],
+            'app_secret'    => $facebook_options['app_secret'],
+            'tocken'        => $facebook_options['tocken']
+        );
+
+        $data = array(
+            'link'  => get_the_permalink( $post )
+        );
+
+        return compartir_wp__publish_on_facebook( $keys, 'me', $data );
+    }
+}
+
+// ----------------------------------------------------------------------------------
