@@ -74,7 +74,7 @@ if ( ! function_exists( 'compartir_wp__share_post_on_facebook_user' ) )
      * @param WP_Post $post
      *
      * @return \Facebook\GraphNodes\GraphNode
-     * * @throws \Facebook\Exceptions\FacebookSDKException
+     * @throws \Facebook\Exceptions\FacebookSDKException
      */
     function compartir_wp__share_post_on_facebook_user(  $post )
     {
