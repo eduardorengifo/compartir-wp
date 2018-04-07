@@ -97,3 +97,21 @@ if ( ! function_exists( 'compartir_wp__e' ) )
 }
 
 // ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__sanetize_title_admin_menu' ) )
+{
+    /**
+     * Filter title admin menu
+     *
+     * @param string $str
+     *
+     * @return string
+     */
+    function compartir_wp__filter_title_admin_menu( $str )
+    {
+        $title = str_replace( '-', ' ', $str );
+        return ucwords( $title );
+    }
+}
+
+// ----------------------------------------------------------------------------------
