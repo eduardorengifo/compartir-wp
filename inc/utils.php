@@ -81,3 +81,19 @@ if ( ! function_exists( 'compartir_wp__save_post_meta_auto_publish' ) )
 }
 
 // ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__e' ) )
+{
+    /**
+     * Print value
+     *
+     * @param string|int $value
+     *
+     * @return void
+     */
+    function compartir_wp__e( $value ) {
+        echo $value;
+    }
+}
+
+// ----------------------------------------------------------------------------------
