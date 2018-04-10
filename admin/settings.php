@@ -54,6 +54,28 @@ if ( ! function_exists( 'compartir_wp__register_general_settings' ) )
                 'text'  => __( 'Activate to share each new post that is published in future.', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
+
+        // Add Share on Facebook Field
+        compartir_wp__add_settings_field(
+            'share_on_facebook',
+            __( 'Share on Facebook', COMPARTIR_WP__TEXT_DOMAIN ),
+            'checkbox',
+            $page,
+            array(
+                'text'  => __( 'Allows the plugin to share the content on Facebook.', COMPARTIR_WP__TEXT_DOMAIN )
+            )
+        );
+
+        // Add Share on Twitter Field
+        compartir_wp__add_settings_field(
+            'share_on_twitter',
+            __( 'Share on Twitter', COMPARTIR_WP__TEXT_DOMAIN ),
+            'checkbox',
+            $page,
+            array(
+                'text'  => __( 'Allows the plugin to share the content on Twitter.', COMPARTIR_WP__TEXT_DOMAIN )
+            )
+        );
     }
 }
 
@@ -224,28 +246,38 @@ if ( ! function_exists( 'compartir_wp__register_fast_publisher_settings' ) )
      */
     function compartir_wp__register_fast_publisher_settings()
     {
-
-        //$section = 'fast-publisher_settings';
         $page = 'fast-publisher';
 
-        // Register Settings
+        // Register Fast Publisher Settings
         compartir_wp__register_settings( $page, COMPARTIR_WP__OPTIONS_FAST_PUBLISHER );
 
-        // Register "Fast Publisher Settings" section in "compartir-wp" page
-       compartir_wp__add_settings_section(
-           $page,
-           __( 'Fast Settings', COMPARTIR_WP__TEXT_DOMAIN ),
-           'section'
-       );
+        // Add Fast Publisher Settings Section
+        compartir_wp__add_settings_section(
+            $page,
+            __( 'Fast Publisher Settings', COMPARTIR_WP__TEXT_DOMAIN ),
+            'section'
+        );
 
-       // Add field
+        // Add Message field
         compartir_wp__add_settings_field(
             'message',
             __( 'Message', COMPARTIR_WP__TEXT_DOMAIN ),
             'textarea',
             $page,
             array(
-                'description'   => esc_html__( 'Description', COMPARTIR_WP__TEXT_DOMAIN )
+                'description'   => __( 'Here you can write the message you want to share on your social networks. Required*', COMPARTIR_WP__TEXT_DOMAIN )
+            )
+        );
+
+        // Add Link Field
+        compartir_wp__add_settings_field(
+            'link',
+            __( 'Link', COMPARTIR_WP__TEXT_DOMAIN ),
+            'text',
+            $page,
+            array(
+                'text'          => __( 'Optional', COMPARTIR_WP__TEXT_DOMAIN ),
+                'description'   => __( 'If you want to add a link with the message, you can place one in this field.', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
     }
