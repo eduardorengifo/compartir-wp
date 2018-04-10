@@ -70,7 +70,7 @@ if ( ! function_exists( 'compartir_wp__publish_on_facebook' ) )
         ]);
 
         try {
-            $response = $fb->post( "/{$id}/feed", $data, $keys['tocken'] );
+            $response = $fb->post( "/{$id}/feed", $data, $keys['token'] );
         } catch ( \Facebook\Exceptions\FacebookResponseException $e ) {
             echo 'Graph returned an error: ' . $e->getMessage();
             exit;

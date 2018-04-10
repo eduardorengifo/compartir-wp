@@ -53,7 +53,7 @@ if ( ! function_exists( 'compartir_wp__share_post_on_facebook' ) )
         $keys = array(
             'app_id'        => $facebook_options['app_id'],
             'app_secret'    => $facebook_options['app_secret'],
-            'tocken'        => $facebook_options['tocken']
+            'token'         => $facebook_options['long_access_token']
         );
 
         $data = array(
