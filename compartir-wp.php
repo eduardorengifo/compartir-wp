@@ -25,6 +25,7 @@ define( 'COMPARTIR_WP__OPTIONS', 'compartir_wp__options' );
 define( 'COMPARTIR_WP__OPTIONS_GENERAL', 'compartir_wp__options_general' );
 define( 'COMPARTIR_WP__OPTIONS_FACEBOOK', 'compartir_wp__options_facebook' );
 define( 'COMPARTIR_WP__OPTIONS_TWITTER', 'compartir_wp__options_twitter' );
+define( 'COMPARTIR_WP__OPTIONS_FAST_PUBLISHER', 'compartir_wp__options_fast_publisher' );
 
 // Adding publish helpers
 require_once( COMPARTIR_WP__PLUGIN_DIR . 'inc/publish.php' );

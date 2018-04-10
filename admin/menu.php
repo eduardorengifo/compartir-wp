@@ -37,7 +37,7 @@ if ( ! function_exists( 'compartir_wp__get_list_admin_menu' ) )
      */
     function compartir_wp__get_list_admin_menu()
     {
-        return array( 'general', 'facebook', 'twitter' );
+        return array( 'general', 'facebook', 'twitter', 'fast-publisher' );
     }
 }
 
@@ -46,6 +46,8 @@ if ( ! function_exists( 'compartir_wp__get_list_admin_menu' ) )
 if ( ! function_exists( 'compartir_wp__get_default_item_admin_menu' ) )
 {
     /**
+     * Get default item admin menu
+     *
      * @return string
      */
     function compartir_wp__get_default_item_admin_menu()
@@ -59,6 +61,8 @@ if ( ! function_exists( 'compartir_wp__get_default_item_admin_menu' ) )
 if ( ! function_exists('compartir_wp__get_tab_admin_nav') )
 {
     /**
+     * Get tab admin nav
+     *
      * @return mixed|string
      */
     function compartir_wp__get_tab_admin_nav()
@@ -75,18 +79,72 @@ if ( ! function_exists('compartir_wp__get_tab_admin_nav') )
 if ( ! function_exists( 'compatir_wp__tab_nav_html' ) )
 {
     /**
+     * Tab nav html
+     *
      * @return void
      */
-    function compatir_wp__tab_nav_html()
+    function compatir_wp__admin_tab_nav_html()
     {
         $items = compartir_wp__get_list_admin_menu();
+
         $tab = compartir_wp__get_tab_admin_nav();
+
         $links = array_map( function ( $item ) use ( $tab ) {
             $tab_active = ( $item === $tab ) ? 'nav-tab-active' : '';
-            return sprintf('<a href="./options-general.php?page=compartir-wp&tab=%s" class="nav-tab %s">%s</a>', $item, $tab_active, ucfirst( $item ) );
+
+            return sprintf('<a href="./options-general.php?page=%s&tab=%s" class="nav-tab %s">%s</a>',
+                COMPARTIR_WP__TEXT_DOMAIN,
+                $item,
+                $tab_active,
+                compartir_wp__filter_title_admin_menu( $item )
+            );
         }, $items );
+
         $links = implode( '', $links );
+
         printf( '<h2 class="nav-tab-wrapper">%s</h2>', $links );
+    }
+}
+
+// ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__admin_form_html' ) )
+{
+    /**
+     * Admin form html
+     *
+     * @return void
+     */
+    function compartir_wp__admin_form_html()
+    {
+        $tab = compartir_wp__get_tab_admin_nav();
+        $group = COMPARTIR_WP__TEXT_DOMAIN . "__{$tab}";
+
+        switch ( $tab ) {
+            case 'fast-publisher':
+                $action = sprintf( 'options-general.php?page=%s&tab=%s',
+                    COMPARTIR_WP__TEXT_DOMAIN,
+                    'fast-publisher'
+                );
+                break;
+            default:
+                $action = 'options.php';
+                break;
+        }
+
+        printf( '<form id="%s__form" action="%s" method="post">',
+            COMPARTIR_WP__TEXT_DOMAIN,
+            $action );
+
+        // output security fields for the registered setting "compartir-wp"
+        settings_fields( $group );
+        // output setting sections and their fields
+        // (sections are registered for "compartir-wp", each field is registered to a specific section)
+        do_settings_sections( $group );
+        // output save settings button
+        submit_button( __( 'Save Settings', COMPARTIR_WP__TEXT_DOMAIN ) );
+
+        compartir_wp__e( '</form>' );
     }
 }
 
@@ -126,9 +184,7 @@ if ( ! function_exists( 'compartir_wp__options_page_html' ) )
         // check user capabilities
         if ( ! current_user_can( 'manage_options' ) ) {
             return;
-        }
-        $tab = compartir_wp__get_tab_admin_nav();
-        $group = "compartir-wp__{$tab}"; ?>
+        } ?>
         <style type="text/css">
             .wrap form#compartir-wp__form h2,
             .wrap form#compartir-wp__form .compartir-wp__spacing_field_section{
@@ -141,23 +197,13 @@ if ( ! function_exists( 'compartir_wp__options_page_html' ) )
         <div class="wrap">
             <?php
             printf( '<h1>%s</h1>', esc_html__( get_admin_page_title() ) );
-            compatir_wp__tab_nav_html(); ?>
+            compatir_wp__admin_tab_nav_html(); ?>
             <div id="poststuff">
                 <div id="post-body" class="metabox-holder columns-2">
                     <!-- main content -->
                     <div id="post-body-content">
                         <div class="meta-box-sortables ui-sortable">
-                            <form id="compartir-wp__form" action="options.php" method="post">
-                                <?php
-                                // output security fields for the registered setting "compartir-wp"
-                                settings_fields( $group );
-                                // output setting sections and their fields
-                                // (sections are registered for "compartir-wp", each field is registered to a specific section)
-                                do_settings_sections( $group );
-                                // output save settings button
-                                submit_button( __( 'Save Settings', COMPARTIR_WP__TEXT_DOMAIN ) );
-                                ?>
-                            </form>
+                            <?php compartir_wp__admin_form_html(); ?>
                         </div>
                         <!-- .meta-box-sortables .ui-sortable -->
                     </div>
@@ -165,7 +211,7 @@ if ( ! function_exists( 'compartir_wp__options_page_html' ) )
                     <!-- sidebar -->
                     <div id="postbox-container-1" class="postbox-container">
                         <div class="meta-box-sortables">
-                            <?php // TODO: Sidebar pending to activate compartir_wp__admin_sidebar(); ?>
+                            <?php compartir_wp__admin_sidebar(); ?>
                         </div>
                         <!-- .meta-box-sortables -->
                     </div>

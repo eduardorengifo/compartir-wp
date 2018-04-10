@@ -14,6 +14,7 @@ if ( ! function_exists( 'compartir_wp__settings_init' ) )
         compartir_wp__register_general_settings();
         compartir_wp__register_facebook_settings();
         compartir_wp__register_twitter_settings();
+        compartir_wp__register_fast_publisher_settings();
     }
 }
 
@@ -31,33 +32,26 @@ if ( ! function_exists( 'compartir_wp__register_general_settings' ) )
      */
     function compartir_wp__register_general_settings()
     {
-        $general_section_id = 'compartir_wp__register_general_settings';
-        $general_section_field = 'compartir_wp__general_field';
-        $general_section_page = 'compartir-wp__general';
-        $general_section_option_name = COMPARTIR_WP__OPTIONS . '_general';
+        $page = 'general';
 
-        register_setting( $general_section_page, $general_section_option_name );
+        // Register General Settings
+        compartir_wp__register_settings( $page, COMPARTIR_WP__OPTIONS_GENERAL );
 
-        // Register a new section in the "compatir-wp" page
-        add_settings_section(
-            $general_section_id,
-            __( 'General Settings', COMPARTIR_WP__TEXT_DOMAIN ),
-            'compartir_wp__field_section',
-            $general_section_page
+        // Add General Settings Section
+        compartir_wp__add_settings_section(
+            $page,
+            __( "General Settings", COMPARTIR_WP__TEXT_DOMAIN ),
+            'section'
         );
 
-        // Register "Auto Publish" field for "General Settings"
-        add_settings_field(
-            "{$general_section_field}_auto_publish",
+        // Add Auto Publish Field
+        compartir_wp__add_settings_field(
+            'auto_publish',
             __( 'Auto Publish', COMPARTIR_WP__TEXT_DOMAIN ),
-            'compartir_wp__field_checkbox',
-            $general_section_page,
-            $general_section_id,
+            'checkbox',
+            $page,
             array(
-                'option_name'   => $general_section_option_name,
-                'label_for'     => "{$general_section_field}_auto_publish",
-                'class'         => 'compartir_wp__row',
-                'text'          => __( 'Activate to share each new post that is published in future.', COMPARTIR_WP__TEXT_DOMAIN )
+                'text'  => __( 'Activate to share each new post that is published in future.', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
     }
@@ -67,98 +61,79 @@ if ( ! function_exists( 'compartir_wp__register_general_settings' ) )
 
 if ( ! function_exists( 'compartir_wp__register_facebook_settings' ) )
 {
+    /**
+     * Register Facebook Settings
+     *
+     * @return void
+     */
     function compartir_wp__register_facebook_settings()
     {
-        $facebook_section_id = 'compartir_wp__section_facebook_settings';
-        $facebook_section_field = 'compartir_wp__facebook_field';
-        $facebook_section_page = 'compartir-wp__facebook';
+        $page = 'facebook';
 
-        $facebook_section_option_name = COMPARTIR_WP__OPTIONS . '_facebook';
+        // Register Facebook Settings
+        compartir_wp__register_settings( $page, COMPARTIR_WP__OPTIONS_FACEBOOK );
 
-        register_setting( $facebook_section_page, $facebook_section_option_name );
-
-        // Register a new section in the "compartir-wp" page
-        add_settings_section(
-            $facebook_section_id,
+        // Add Facebook Settings Section
+        compartir_wp__add_settings_section(
+            $page,
             __( 'Facebook Settings', COMPARTIR_WP__TEXT_DOMAIN ),
-            'compartir_wp__field_section',
-            $facebook_section_page
+            'section'
         );
 
-        // Register "Facebook App ID" field for "Facebook Settings"
-        add_settings_field(
-            "{$facebook_section_field}_app_id",
+        // Add App ID Field
+        compartir_wp__add_settings_field(
+            'app_id',
             __( 'App ID', COMPARTIR_WP__TEXT_DOMAIN ),
-            'compartir_wp__field_text',
-            $facebook_section_page,
-            $facebook_section_id,
+            'text',
+            $page,
             array(
-                'option_name'   => $facebook_section_option_name,
-                'label_for'     => "{$facebook_section_field}_app_id",
-                'class'         => 'compartir_wp__row',
                 'text'          => __( 'Required', COMPARTIR_WP__TEXT_DOMAIN ),
                 'description'   => __( 'You can get it in the configuration of your facebook application. <a href="https://developers.facebook.com/apps" target="_blank">Link</a>', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
 
-        // Register "Facebook App Secret" field for "Facebook Settings"
-        add_settings_field(
-            "{$facebook_section_field}_app_secret",
+        // Add App Secret Field
+        compartir_wp__add_settings_field(
+            'app_secret',
             __( 'App Secret', COMPARTIR_WP__TEXT_DOMAIN ),
-            'compartir_wp__field_text',
-            $facebook_section_page,
-            $facebook_section_id,
+            'text',
+            $page,
             array(
-                'option_name'  => $facebook_section_option_name,
-                'label_for'     => "{$facebook_section_field}_app_secret",
-                'class'         => 'compartir_wp__row',
                 'text'          => __( 'Required', COMPARTIR_WP__TEXT_DOMAIN ),
                 'description'   => __( 'You can get it in the configuration of your facebook application. <a href="https://developers.facebook.com/apps" target="_blank">Link</a>', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
 
-        // Register "Facebook Long Access Token" field for "Facebook Settings"
-        add_settings_field(
-            "{$facebook_section_field}_long_access_token",
+        // Add Long Access Token Field
+        compartir_wp__add_settings_field(
+            'long_access_token',
             __( 'Long Access Token', COMPARTIR_WP__TEXT_DOMAIN ),
-            'compartir_wp__field_text',
-            $facebook_section_page,
-            $facebook_section_id,
+            'text',
+            $page,
             array(
-                'option_name'   => $facebook_section_option_name,
-                'label_for'     => "{$facebook_section_field}_long_access_token",
-                'class'         => 'compartir_wp__row',
                 'text'          => __( 'Required', COMPARTIR_WP__TEXT_DOMAIN ),
                 'description'   => __( 'Use the tools of facebook. <a href="https://developers.facebook.com/tools/explorer/" target="_blank">Link</a>', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
 
-        // Register "Facebook Fan Pages IDs" field for "Facebook Settings"
-        add_settings_field(
-            "{$facebook_section_field}_fan_pages_ids",
+        // Add FanPages IDs Field
+        compartir_wp__add_settings_field(
+            'fan_pages_ids',
             __( 'FanPages IDs', COMPARTIR_WP__TEXT_DOMAIN ),
-            'compartir_wp__field_textarea',
-            $facebook_section_page,
-            $facebook_section_id,
+            'textarea',
+            $page,
             array(
-                'option_name'   => $facebook_section_option_name,
-                'label_for'     => "{$facebook_section_field}_fans_pages_ids",
-                'class'         => 'compartir_wp__row',
                 'description'   => __( 'Add the ID of each Fan Page where you are the administrator separated by commas. Example: xxxxxxxx, yyyyyyyy, zzzzzzzz', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
 
-        // Register "Facebook Groups IDs" field for "Facebook Settings"
-        add_settings_field(
-            "{$facebook_section_field}_groups_ids",
+        // Add Groups IDs Field
+        compartir_wp__add_settings_field(
+            'groups_ids',
             __( 'Groups IDs', COMPARTIR_WP__TEXT_DOMAIN ),
-            'compartir_wp__field_textarea',
-            $facebook_section_page,
-            $facebook_section_id,
+            'textarea',
+            $page,
             array(
-                'option_name'   => $facebook_section_option_name,
-                'label_for'     => "{$facebook_section_field}_groups_ids",
-                'class'         => 'compartir_wp__row',
                 'description'   => __( 'Add the ID of each group where you are the administrator separated by commas. Example: xxxxxxxx, yyyyyyyy, zzzzzzzz', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
@@ -169,86 +144,108 @@ if ( ! function_exists( 'compartir_wp__register_facebook_settings' ) )
 
 if ( ! function_exists('compartir_wp__register_twitter_settings') )
 {
+    /**
+     * Register Twitter Settings
+     *
+     * @return void
+     */
     function compartir_wp__register_twitter_settings()
     {
-        $twitter_section_id = 'compartir_wp__section_twitter_settings';
-        $twitter_section_field = 'compartir_wp__twitter_field';
-        $twitter_section_page = 'compartir-wp__twitter';
+        $page = 'twitter';
 
-        $twitter_section_option_name = COMPARTIR_WP__OPTIONS . '_twitter';
+        // Register Twitter Settings
+        compartir_wp__register_settings( $page, COMPARTIR_WP__OPTIONS_TWITTER );
 
-        register_setting( $twitter_section_page, $twitter_section_option_name );
-
-        // Register "Twitter Settings" section in "compartir-wp" page
-        add_settings_section(
-            $twitter_section_id,
+        // Add Twitter Settings Section
+        compartir_wp__add_settings_section(
+            $page,
             __( 'Twitter Settings', COMPARTIR_WP__TEXT_DOMAIN ),
-            'compartir_wp__field_section',
-            $twitter_section_page
+            'section'
         );
 
-
-        // Register Twitter Access Token field for "Twitter Settings"
-        add_settings_field(
-            "{$twitter_section_field}_access_token",
+        // Add Access Token Field
+        compartir_wp__add_settings_field(
+            'access_token',
             __( 'Access Token', COMPARTIR_WP__TEXT_DOMAIN ),
-            'compartir_wp__field_text',
-            $twitter_section_page,
-            $twitter_section_id,
+            'text',
+            $page,
             array(
-                'option_name'  => $twitter_section_option_name,
-                'label_for'     => "{$twitter_section_field}_access_token",
-                'class'         => 'compartir_wp__row',
                 'text'          => __( 'Required', COMPARTIR_WP__TEXT_DOMAIN ),
                 'description'   => __( 'Create your twitter application and get the keys. <a href="https://apps.twitter.com/app/" target="_blank">Link</a>', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
 
-        // Register "Twitter Access Token Secret" field for "Twitter Settings"
-        add_settings_field(
-            "{$twitter_section_field}_access_token_secret",
+        // Add Access Token Secret Field
+        compartir_wp__add_settings_field(
+            'access_token_secret',
             __( 'Access Token Secret', COMPARTIR_WP__TEXT_DOMAIN ),
-            'compartir_wp__field_text',
-            $twitter_section_page,
-            $twitter_section_id,
+            'text',
+            $page,
             array(
-                'option_name'  => $twitter_section_option_name,
-                'label_for'     => "{$twitter_section_field}_access_token_secret",
-                'class'         => 'compartir_wp__row',
                 'text'          => __( 'Required', COMPARTIR_WP__TEXT_DOMAIN ),
                 'description'   => __( 'Create your twitter application and get the keys. <a href="https://apps.twitter.com/app/" target="_blank">Link</a>', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
 
-        // Register "Twitter Consumer Key" field for "Twitter Settings"
-        add_settings_field(
-            "{$twitter_section_field}_consumer_key",
+        // Add Consumer Key Field
+        compartir_wp__add_settings_field(
+            'consumer_key',
             __( 'Consumer Key', COMPARTIR_WP__TEXT_DOMAIN ),
-            'compartir_wp__field_text',
-            $twitter_section_page,
-            $twitter_section_id,
+            'text',
+            $page,
             array(
-                'option_name'  => $twitter_section_option_name,
-                'label_for'     => "{$twitter_section_field}_consumer_key",
-                'class'         => 'compartir_wp__row',
                 'text'          => __( 'Required', COMPARTIR_WP__TEXT_DOMAIN ),
                 'description'   => __( 'Create your twitter application and get the keys. <a href="https://apps.twitter.com/app/" target="_blank">Link</a>', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
 
-        // Register "Twitter Consumer Secret" field for "Twitter Settings"
-        add_settings_field(
-            "{$twitter_section_field}_consumer_secret",
+        // Add Consumer Secret Field
+        compartir_wp__add_settings_field(
+            'consumer_secret',
             __( 'Consumer Secret', COMPARTIR_WP__TEXT_DOMAIN ),
-            'compartir_wp__field_text',
-            $twitter_section_page,
-            $twitter_section_id,
+            'text',
+            $page,
             array(
-                'option_name'  => $twitter_section_option_name,
-                'label_for'     => "{$twitter_section_field}_consumer_secret",
-                'class'         => 'compartir_wp__row',
                 'text'          => __( 'Required', COMPARTIR_WP__TEXT_DOMAIN ),
                 'description'   => __( 'Create your twitter application and get the keys. <a href="https://apps.twitter.com/app/" target="_blank">Link</a>', COMPARTIR_WP__TEXT_DOMAIN )
+            )
+        );
+    }
+}
+
+// ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__register_fast_publisher_settings' ) )
+{
+    /**
+     * Register Fast Publisher Settings
+     *
+     * @return void
+     */
+    function compartir_wp__register_fast_publisher_settings()
+    {
+
+        //$section = 'fast-publisher_settings';
+        $page = 'fast-publisher';
+
+        // Register Settings
+        compartir_wp__register_settings( $page, COMPARTIR_WP__OPTIONS_FAST_PUBLISHER );
+
+        // Register "Fast Publisher Settings" section in "compartir-wp" page
+       compartir_wp__add_settings_section(
+           $page,
+           __( 'Fast Settings', COMPARTIR_WP__TEXT_DOMAIN ),
+           'section'
+       );
+
+       // Add field
+        compartir_wp__add_settings_field(
+            'message',
+            __( 'Message', COMPARTIR_WP__TEXT_DOMAIN ),
+            'textarea',
+            $page,
+            array(
+                'description'   => esc_html__( 'Description', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
     }
