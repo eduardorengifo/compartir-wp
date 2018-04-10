@@ -74,7 +74,7 @@ if ( ! function_exists( 'compartir_wp__save_post_meta_auto_publish' ) )
     function compartir_wp__save_post_meta_auto_publish( $post_id )
     {
         $value = get_post_meta( $post_id, 'compartir_wp__auto_publish_count', true );
-        $value = ( is_numeric( $value ) ) ? $value + 1 : 0;
+        $value = ( is_numeric( $value ) ) ? $value + 1 : 1;
 
         compartir_wp__add_or_update_post_meta( $post_id, 'compartir_wp__auto_publish_count', $value );
     }

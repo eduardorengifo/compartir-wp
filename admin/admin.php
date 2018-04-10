@@ -13,4 +13,4 @@ require_once( COMPARTIR_WP__PLUGIN_DIR . 'admin/settings.php' );
 require_once( COMPARTIR_WP__PLUGIN_DIR . 'admin/menu.php' );
 
 // Adding editor
-// require_once( COMPARTIR_WP__PLUGIN_DIR . 'admin/editor.php' );
+require_once( COMPARTIR_WP__PLUGIN_DIR . 'admin/editor.php' );
