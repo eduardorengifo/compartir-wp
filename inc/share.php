@@ -18,8 +18,8 @@ if ( ! function_exists( 'compartir_wp__share_post_on_twitter' ) )
         $keys = array(
             'access_token'          => $twitter_options['access_token'],
             'access_token_secret'   => $twitter_options['access_token_secret'],
-            'consumer_key'          => $twitter_options['customer_key'],
-            'consumer_secret'       => $twitter_options['customer_secret']
+            'consumer_key'          => $twitter_options['consumer_key'],
+            'consumer_secret'       => $twitter_options['consumer_secret']
         );
 
         $media = null;
