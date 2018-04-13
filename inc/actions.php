@@ -32,10 +32,30 @@ if ( ! function_exists( 'compartir_wp__on_publish_draft_post' ) )
      */
     function compartir_wp__on_publish_draft_post( $post )
     {
-        // Your code
+        // TODO: Your code
     }
 }
 
 add_action(  'draft_to_publish',  'compartir_wp__on_publish_draft_post', 10, 1 );
+
+// ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__on_update_post' ) )
+{
+    /**
+     * Share Update Post
+     *
+     * @param WP_Post $post
+     *
+     * @return void
+     * @throws Exception
+     */
+    function compartir_wp__on_update_post( $post )
+    {
+        // TODO: Your code
+    }
+}
+
+add_action( 'publish_to_publish', 'compartir_wp__on_update_post', 10, 1 );
 
 // ----------------------------------------------------------------------------------
