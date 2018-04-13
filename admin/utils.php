@@ -82,3 +82,22 @@ if ( ! function_exists( 'compartir_wp__add_settings_field' ) )
 }
 
 // ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__share_fast_publisher' ) )
+{
+    /**
+     * Share Fast Publisher
+     *
+     * @return void
+     */
+    function compartir_wp__share_fast_publisher()
+    {
+        if ( empty( $_POST ) || ! isset( $_POST['compartir_wp__options_fast-publisher'] )  ) return;
+
+        $options_form = $_POST['compartir_wp__options_fast-publisher'];
+
+        //  TODO: Your code for share fast publisher
+    }
+}
+
+// ----------------------------------------------------------------------------------

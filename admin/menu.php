@@ -126,9 +126,15 @@ if ( ! function_exists( 'compartir_wp__admin_form_html' ) )
                     COMPARTIR_WP__TEXT_DOMAIN,
                     'fast-publisher'
                 );
+
+                $text_submit_button = __( 'Publish', COMPARTIR_WP__TEXT_DOMAIN );
+
+                compartir_wp__share_fast_publisher();
                 break;
             default:
                 $action = 'options.php';
+
+                $text_submit_button = __( 'Save Settings', COMPARTIR_WP__TEXT_DOMAIN );
                 break;
         }
 
@@ -142,7 +148,7 @@ if ( ! function_exists( 'compartir_wp__admin_form_html' ) )
         // (sections are registered for "compartir-wp", each field is registered to a specific section)
         do_settings_sections( $group );
         // output save settings button
-        submit_button( __( 'Save Settings', COMPARTIR_WP__TEXT_DOMAIN ) );
+        submit_button( $text_submit_button );
 
         compartir_wp__e( '</form>' );
     }
