@@ -47,6 +47,33 @@ if ( ! function_exists( 'compartir_wp__publish_on_twitter' ) )
 
 // ----------------------------------------------------------------------------------
 
+if ( ! function_exists( 'compartir_wp__publish_on_twitter_with_keys' ) )
+{
+    /**
+     * Publish on Twitter with Keys
+     *
+     * @param string $status
+     * @param null|array $media
+     *
+     * @return array|object
+     */
+    function compartir_wp__publish_on_twitter_with_keys( $status, $media = null )
+    {
+        $twitter_options = get_option( COMPARTIR_WP__OPTIONS_TWITTER );
+
+        $keys = array(
+            'access_token'          => $twitter_options['access_token'],
+            'access_token_secret'   => $twitter_options['access_token_secret'],
+            'consumer_key'          => $twitter_options['consumer_key'],
+            'consumer_secret'       => $twitter_options['consumer_secret']
+        );
+
+        return compartir_wp__publish_on_twitter( $keys, $status, $media );
+    }
+}
+
+// ----------------------------------------------------------------------------------
+
 if ( ! function_exists( 'compartir_wp__publish_on_facebook' ) )
 {
     /**
@@ -80,6 +107,33 @@ if ( ! function_exists( 'compartir_wp__publish_on_facebook' ) )
         }
 
         return $response->getGraphNode();
+    }
+}
+
+// ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__publish_on_facebook_with_keys' ) )
+{
+    /**
+     * Publish on Facebook with Keys
+     *
+     * @param string $id
+     * @param array[] $data
+     *
+     * @return \Facebook\GraphNodes\GraphNode
+     * @throws \Facebook\Exceptions\FacebookSDKException
+     */
+    function compartir_wp__publish_on_facebook_with_keys( $id, $data )
+    {
+        $facebook_options = get_option( COMPARTIR_WP__OPTIONS_FACEBOOK );
+
+        $keys = array(
+            'app_id'        => $facebook_options['app_id'],
+            'app_secret'    => $facebook_options['app_secret'],
+            'token'         => $facebook_options['long_access_token']
+        );
+
+        return compartir_wp__publish_on_facebook( $keys, $id, $data );
     }
 }
 

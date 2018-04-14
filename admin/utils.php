@@ -96,7 +96,19 @@ if ( ! function_exists( 'compartir_wp__share_fast_publisher' ) )
 
         $options_form = $_POST['compartir_wp__options_fast-publisher'];
 
-        //  TODO: Your code for share fast publisher
+        $general_options = get_option( COMPARTIR_WP__OPTIONS_GENERAL );
+
+        if ( isset( $general_options['share_on_twitter'] )
+            && $general_options['share_on_twitter'] === 'on' ) {
+
+            compartir_wp__publish_on_twitter_with_keys( $options_form['message'] );
+        }
+
+        if ( isset( $general_options['share_on_facebook'] )
+            && $general_options['share_on_facebook'] === 'on' ) {
+
+            //  TODO: For finishing the part of facebook
+        }
     }
 }
 
