@@ -32,7 +32,19 @@ if ( ! function_exists( 'compartir_wp__on_publish_draft_post' ) )
      */
     function compartir_wp__on_publish_draft_post( $post )
     {
-        // TODO: Your code
+        $general_options = get_option( COMPARTIR_WP__OPTIONS_GENERAL );
+
+        if ( isset( $general_options['auto_publish'] )
+            && $general_options['auto_publish'] === 'on' ) {
+
+            compartir_wp__share_post( $post );
+
+        } elseif ( isset( $_POST['compartir_wp__auto_publish_count'] )
+            && $_POST['compartir_wp__auto_publish_count'] === '1' ) {
+
+            compartir_wp__share_post( $post );
+
+        }
     }
 }
 
@@ -52,7 +64,11 @@ if ( ! function_exists( 'compartir_wp__on_update_post' ) )
      */
     function compartir_wp__on_update_post( $post )
     {
-        // TODO: Your code
+        if( isset( $_POST['compartir_wp__auto_publish_count'] )
+            && $_POST['compartir_wp__auto_publish_count'] === '1' ) {
+
+            compartir_wp__share_post( $post );
+        }
     }
 }
 

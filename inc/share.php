@@ -2,6 +2,35 @@
 
 // ----------------------------------------------------------------------------------
 
+if ( ! function_exists( 'compartir_wp__share_post' ) )
+{
+    /**
+     * Share Post
+     *
+     * @param WP_Post $post
+     *
+     * @return void
+     */
+    function compartir_wp__share_post( $post )
+    {
+        $general_options = get_option( COMPARTIR_WP__OPTIONS_GENERAL );
+
+        if ( isset( $general_options['share_on_twitter'] )
+            && $general_options['share_on_twitter'] === 'on' ) {
+            compartir_wp__share_post_on_twitter( $post );
+        }
+
+        if ( isset( $general_options['share_on_facebook'] )
+            && $general_options['share_on_facebook'] === 'on' ) {
+            //  TODO: For finishing the part of facebook
+        }
+
+        compartir_wp__save_post_meta_auto_publish( $post->ID );
+    }
+}
+
+// ----------------------------------------------------------------------------------
+
 if ( ! function_exists( 'compartir_wp__share_post_on_twitter' ) )
 {
     /**
