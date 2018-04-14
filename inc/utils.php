@@ -115,3 +115,19 @@ if ( ! function_exists( 'compartir_wp__sanetize_title_admin_menu' ) )
 }
 
 // ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__valid_url' ) )
+{
+    /**
+     * Valid URL
+     *
+     * @param string $url
+     * @return bool
+     */
+    function compartir_wp__valid_url( $url )
+    {
+        return filter_var( $url, FILTER_VALIDATE_URL );
+    }
+}
+
+// ----------------------------------------------------------------------------------
