@@ -7,9 +7,10 @@ if ( ! function_exists( 'compartir_wp__share_post' ) )
     /**
      * Share Post
      *
-     * @param WP_Post $post
+     * @param $post
      *
      * @return void
+     * @throws \Facebook\Exceptions\FacebookSDKException
      */
     function compartir_wp__share_post( $post )
     {
@@ -17,15 +18,39 @@ if ( ! function_exists( 'compartir_wp__share_post' ) )
 
         if ( isset( $general_options['share_on_twitter'] )
             && $general_options['share_on_twitter'] === 'on' ) {
+
             compartir_wp__share_post_on_twitter( $post );
         }
 
         if ( isset( $general_options['share_on_facebook'] )
             && $general_options['share_on_facebook'] === 'on' ) {
-            //  TODO: For finishing the part of facebook
+
+            compartir_wp__share_post_on_facebook( $post );
         }
 
         compartir_wp__save_post_meta_auto_publish( $post->ID );
+    }
+}
+
+// ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__share_on_twitter' ) )
+{
+    /**
+     * Share on Twitter
+     *
+     * @param string $message
+     * @param null|array $media
+     *
+     * @return array|object
+     */
+    function compartir_wp__share_on_twitter( $message, $media = null )
+    {
+        $parameters = array(
+            'status'    => $message
+        );
+
+        return compartir_wp__publish_on_twitter_with_keys( $parameters, $media );
     }
 }
 
@@ -49,7 +74,27 @@ if ( ! function_exists( 'compartir_wp__share_post_on_twitter' ) )
             $media = array( $attached_file );
         }
 
-        return compartir_wp__publish_on_twitter_with_keys( $post->post_title, $media );
+        return compartir_wp__share_on_twitter( $post->post_title, $media );
+    }
+}
+
+// ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__share_on_facebook' ) )
+{
+    /**
+     * Share on Facebook
+     *
+     * @param string $message
+     * @param null|string $link
+     * @param null|string $media
+     *
+     * @return void
+     * @throws \Facebook\Exceptions\FacebookSDKException
+     */
+    function compartir_wp__share_on_facebook( $message, $link = null, $media = null )
+    {
+        compartir_wp__share_on_facebook_by_user( $message, $link, $media );
     }
 }
 
@@ -60,37 +105,42 @@ if ( ! function_exists( 'compartir_wp__share_post_on_facebook' ) )
     /**
      * Share post on Facebook
      *
-     * @param string $id User id, example: me
-     * @param WP_Post $post
+     * @param  WP_Post $post
      *
-     * @return \Facebook\GraphNodes\GraphNode
+     * @return void
      * @throws \Facebook\Exceptions\FacebookSDKException
      */
-    function compartir_wp__share_post_on_facebook( $id , $post )
+    function compartir_wp__share_post_on_facebook( $post )
     {
-        $data = array(
-            'link'  => get_the_permalink( $post )
-        );
-
-        return compartir_wp__publish_on_facebook_with_keys( $id, $data );
+        compartir_wp__share_on_facebook( $post->post_title, get_the_permalink( $post->ID ) );
     }
 }
 
 // ----------------------------------------------------------------------------------
 
-if ( ! function_exists( 'compartir_wp__share_post_on_facebook_user' ) )
+if ( ! function_exists( 'compartir_wp__share_on_facebook_by_user' ) )
 {
     /**
      * Share post on Facebook for user
      *
-     * @param WP_Post $post
+     * @param string $message
+     * @param null|string $link
+     * @param null|string $media
      *
      * @return \Facebook\GraphNodes\GraphNode
      * @throws \Facebook\Exceptions\FacebookSDKException
      */
-    function compartir_wp__share_post_on_facebook_user(  $post )
+    function compartir_wp__share_on_facebook_by_user( $message, $link = null, $media = null )
     {
-        return compartir_wp__share_post_on_facebook( 'me', $post );
+        $parameters = array(
+            'message'   => $message
+        );
+
+        if ( isset( $link ) && ! empty( $link ) && compartir_wp__valid_url( $link ) ) {
+            $parameters['link'] = $link;
+        }
+
+        return compartir_wp__publish_on_facebook_with_keys( 'me', $parameters, $media );
     }
 }
 

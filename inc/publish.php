@@ -8,12 +8,12 @@ if ( ! function_exists( 'compartir_wp__publish_on_twitter' ) )
      * Publish on Twitter
      *
      * @param array $keys
-     * @param string $status
+     * @param array $parameters
      * @param array[string] $media
      *
      * @return array|object
      */
-    function compartir_wp__publish_on_twitter( $keys, $status, $media = null )
+    function compartir_wp__publish_on_twitter( $keys, $parameters = array(), $media = null )
     {
         require_once( COMPARTIR_WP__PLUGIN_DIR . 'vendor/autoload.php' );
 
@@ -23,10 +23,6 @@ if ( ! function_exists( 'compartir_wp__publish_on_twitter' ) )
         $consumer_secret = $keys['consumer_secret'];
 
         $connection = new \Abraham\TwitterOAuth\TwitterOAuth( $consumer_key, $consumer_secret, $access_token, $access_token_secret );
-
-        $parameters = array(
-            'status'    => $status
-        );
 
         if ( isset( $media ) && ! empty( $media ) && is_array( $media ) ) {
 
@@ -52,12 +48,12 @@ if ( ! function_exists( 'compartir_wp__publish_on_twitter_with_keys' ) )
     /**
      * Publish on Twitter with Keys
      *
-     * @param string $status
+     * @param array $parameters
      * @param null|array $media
      *
      * @return array|object
      */
-    function compartir_wp__publish_on_twitter_with_keys( $status, $media = null )
+    function compartir_wp__publish_on_twitter_with_keys( $parameters, $media = null )
     {
         $twitter_options = get_option( COMPARTIR_WP__OPTIONS_TWITTER );
 
@@ -68,7 +64,7 @@ if ( ! function_exists( 'compartir_wp__publish_on_twitter_with_keys' ) )
             'consumer_secret'       => $twitter_options['consumer_secret']
         );
 
-        return compartir_wp__publish_on_twitter( $keys, $status, $media );
+        return compartir_wp__publish_on_twitter( $keys, $parameters, $media );
     }
 }
 
@@ -81,12 +77,13 @@ if ( ! function_exists( 'compartir_wp__publish_on_facebook' ) )
      *
      * @param array $keys
      * @param string $id User id, example: me
-     * @param array[] $data
+     * @param array $parameters
+     * @param null|string $media
      *
      * @return \Facebook\GraphNodes\GraphNode
      * @throws \Facebook\Exceptions\FacebookSDKException
      */
-    function compartir_wp__publish_on_facebook( $keys, $id, $data )
+    function compartir_wp__publish_on_facebook( $keys, $id, $parameters, $media = null )
     {
         require_once( COMPARTIR_WP__PLUGIN_DIR . 'vendor/autoload.php' );
 
@@ -96,8 +93,12 @@ if ( ! function_exists( 'compartir_wp__publish_on_facebook' ) )
             'default_graph_version' => 'v2.12',
         ]);
 
+        if ( isset( $media ) && ! empty( $media ) && is_string( $media ) ) {
+            $parameters['source'] = $fb->fileToUpload( $media );
+        }
+
         try {
-            $response = $fb->post( "/{$id}/feed", $data, $keys['token'] );
+            $response = $fb->post( "/{$id}/feed", $parameters, $keys['token'] );
         } catch ( \Facebook\Exceptions\FacebookResponseException $e ) {
             echo 'Graph returned an error: ' . $e->getMessage();
             exit;
@@ -118,12 +119,13 @@ if ( ! function_exists( 'compartir_wp__publish_on_facebook_with_keys' ) )
      * Publish on Facebook with Keys
      *
      * @param string $id
-     * @param array[] $data
+     * @param array $parameters
+     * @param string $media
      *
      * @return \Facebook\GraphNodes\GraphNode
      * @throws \Facebook\Exceptions\FacebookSDKException
      */
-    function compartir_wp__publish_on_facebook_with_keys( $id, $data )
+    function compartir_wp__publish_on_facebook_with_keys( $id, $parameters, $media = null )
     {
         $facebook_options = get_option( COMPARTIR_WP__OPTIONS_FACEBOOK );
 
@@ -133,7 +135,7 @@ if ( ! function_exists( 'compartir_wp__publish_on_facebook_with_keys' ) )
             'token'         => $facebook_options['long_access_token']
         );
 
-        return compartir_wp__publish_on_facebook( $keys, $id, $data );
+        return compartir_wp__publish_on_facebook( $keys, $id, $parameters, $media );
     }
 }
 

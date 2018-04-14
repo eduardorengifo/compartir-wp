@@ -89,9 +89,11 @@ if ( ! function_exists( 'compartir_wp__share_fast_publisher' ) )
      * Share Fast Publisher
      *
      * @return void
+     * @throws \Facebook\Exceptions\FacebookSDKException
      */
     function compartir_wp__share_fast_publisher()
     {
+        // TODO: For solving the link field $options_form['link']
         if ( empty( $_POST ) || ! isset( $_POST['compartir_wp__options_fast-publisher'] )  ) return;
 
         $options_form = $_POST['compartir_wp__options_fast-publisher'];
@@ -101,13 +103,13 @@ if ( ! function_exists( 'compartir_wp__share_fast_publisher' ) )
         if ( isset( $general_options['share_on_twitter'] )
             && $general_options['share_on_twitter'] === 'on' ) {
 
-            compartir_wp__publish_on_twitter_with_keys( $options_form['message'] );
+            compartir_wp__share_on_twitter( $options_form['message'] );
         }
 
         if ( isset( $general_options['share_on_facebook'] )
             && $general_options['share_on_facebook'] === 'on' ) {
 
-            //  TODO: For finishing the part of facebook
+            compartir_wp__share_on_facebook( $options_form['message'] );
         }
     }
 }
