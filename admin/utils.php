@@ -93,23 +93,44 @@ if ( ! function_exists( 'compartir_wp__share_fast_publisher' ) )
      */
     function compartir_wp__share_fast_publisher()
     {
-        // TODO: For solving the link field $options_form['link']
-        if ( empty( $_POST ) || ! isset( $_POST['compartir_wp__options_fast-publisher'] )  ) return;
+        if ( empty( $_POST )
+            || ! isset( $_POST['compartir_wp__options_fast-publisher'] ) ) {
+            return;
+        }
 
         $options_form = $_POST['compartir_wp__options_fast-publisher'];
+
+        if ( ! isset( $options_form['message'] )
+            || empty( $options_form['message'] ) ) {
+            return;
+        }
+
+        $link = null;
+
+        if ( isset( $options_form['link'] )
+            && ! empty( $options_form['link'] )
+            && compartir_wp__valid_url( $options_form['link'] ) ) {
+            $link = $options_form['link'];
+        }
 
         $general_options = get_option( COMPARTIR_WP__OPTIONS_GENERAL );
 
         if ( isset( $general_options['share_on_twitter'] )
             && $general_options['share_on_twitter'] === 'on' ) {
 
-            compartir_wp__share_on_twitter( $options_form['message'] );
+            $message = $options_form['message'];
+
+            if ( compartir_wp__valid_url( $link ) ) {
+                $message .= " {$link}";
+            }
+
+            compartir_wp__share_on_twitter( $message );
         }
 
         if ( isset( $general_options['share_on_facebook'] )
             && $general_options['share_on_facebook'] === 'on' ) {
 
-            compartir_wp__share_on_facebook( $options_form['message'] );
+            compartir_wp__share_on_facebook( $options_form['message'], $link );
         }
     }
 }
