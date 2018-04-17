@@ -59,10 +59,23 @@ if ( ! function_exists( 'compartir_wp__register_general_settings' ) )
         compartir_wp__add_settings_field(
             'share_on_facebook',
             __( 'Share on Facebook', COMPARTIR_WP__TEXT_DOMAIN ),
-            'checkbox',
+            'multi_checkbox',
             $page,
             array(
-                'text'  => __( 'Allows the plugin to share the content on Facebook.', COMPARTIR_WP__TEXT_DOMAIN )
+                'items' => array(
+                    array(
+                        'id'    => 'user',
+                        'text'  => __( 'Share in my user profile', COMPARTIR_WP__TEXT_DOMAIN )
+                    ),
+                    array(
+                        'id'    => 'fanpages',
+                        'text'  => __( 'Share on fan pages', COMPARTIR_WP__TEXT_DOMAIN )
+                    ),
+                    array(
+                        'id'    => 'groups',
+                        'text'  => __( 'Share in groups', COMPARTIR_WP__TEXT_DOMAIN )
+                    )
+                )
             )
         );
 
@@ -140,23 +153,25 @@ if ( ! function_exists( 'compartir_wp__register_facebook_settings' ) )
 
         // Add FanPages IDs Field
         compartir_wp__add_settings_field(
-            'fan_pages_ids',
-            __( 'FanPages IDs', COMPARTIR_WP__TEXT_DOMAIN ),
-            'textarea',
+            'fan_pages',
+            __( 'Fan Pages', COMPARTIR_WP__TEXT_DOMAIN ),
+            'multi_checkbox',
             $page,
             array(
-                'description'   => __( 'Add the ID of each Fan Page where you are the administrator separated by commas. Example: xxxxxxxx, yyyyyyyy, zzzzzzzz', COMPARTIR_WP__TEXT_DOMAIN )
+                'description'   => __( 'Add the ID of each Fan Page where you are the administrator separated by commas. Example: xxxxxxxx, yyyyyyyy, zzzzzzzz', COMPARTIR_WP__TEXT_DOMAIN ),
+                'error'         => __( 'Error', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
 
         // Add Groups IDs Field
         compartir_wp__add_settings_field(
-            'groups_ids',
-            __( 'Groups IDs', COMPARTIR_WP__TEXT_DOMAIN ),
-            'textarea',
+            'groups',
+            __( 'Groups', COMPARTIR_WP__TEXT_DOMAIN ),
+            'multi_checkbox',
             $page,
             array(
-                'description'   => __( 'Add the ID of each group where you are the administrator separated by commas. Example: xxxxxxxx, yyyyyyyy, zzzzzzzz', COMPARTIR_WP__TEXT_DOMAIN )
+                'description'   => __( 'Add the ID of each group where you are the administrator separated by commas. Example: xxxxxxxx, yyyyyyyy, zzzzzzzz', COMPARTIR_WP__TEXT_DOMAIN ),
+                'error'         => __( 'Error', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
     }

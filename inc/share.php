@@ -94,7 +94,13 @@ if ( ! function_exists( 'compartir_wp__share_on_facebook' ) )
      */
     function compartir_wp__share_on_facebook( $message, $link = null, $media = null )
     {
-        compartir_wp__share_on_facebook_by_user( $message, $link, $media );
+        $general_options = get_option( COMPARTIR_WP__OPTIONS_GENERAL );
+
+        if ( isset( $general_options['share_on_facebook']['user'] )
+            && $general_options['share_on_facebook']['user'] === 'on' ) {
+
+            compartir_wp__share_on_facebook_by_user( $message, $link, $media );
+        }
     }
 }
 

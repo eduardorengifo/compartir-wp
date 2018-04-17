@@ -11,3 +11,6 @@ require_once( COMPARTIR_WP__PLUGIN_DIR . 'admin/fields/textarea.php' );
 
 // Adding field checkbox
 require_once( COMPARTIR_WP__PLUGIN_DIR . 'admin/fields/checkbox.php' );
+
+// Adding field multi checkbox
+require_once( COMPARTIR_WP__PLUGIN_DIR . 'admin/fields/multi-checkbox.php' );
