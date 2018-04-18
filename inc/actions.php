@@ -29,6 +29,7 @@ if ( ! function_exists( 'compartir_wp__on_publish_draft_post' ) )
      * @link https://codex.wordpress.org/Post_Status_Transitions
      *
      * @return void
+     * @throws \Facebook\Exceptions\FacebookSDKException
      */
     function compartir_wp__on_publish_draft_post( $post )
     {
