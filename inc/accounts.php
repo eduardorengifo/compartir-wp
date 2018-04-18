@@ -23,19 +23,11 @@ if ( ! function_exists( 'compartir_wp__get_fan_pages_on_facebook' ) )
             'default_graph_version' => 'v2.12'
         ]);
 
-        try {
-            // Returns a `FacebookFacebookResponse` object
-            $response = $fb->get(
-                "/{$id}/accounts?fields=id,name,access_token&limit=1000",
-                $keys['token']
-            );
-        } catch( \Facebook\Exceptions\FacebookResponseException $e ) {
-            echo 'Graph returned an error: ' . $e->getMessage();
-            exit;
-        } catch( \Facebook\Exceptions\FacebookSDKException $e ) {
-            echo 'Facebook SDK returned an error: ' . $e->getMessage();
-            exit;
-        }
+        // Returns a `FacebookFacebookResponse` object
+        $response = $fb->get(
+            "/{$id}/accounts?fields=id,name,access_token&limit=1000",
+            $keys['token']
+        );
 
         return $response->getDecodedBody();
     }

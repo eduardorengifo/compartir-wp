@@ -144,6 +144,10 @@ if ( ! function_exists( 'compartir_wp__get_groups_facebook' ) )
     function compartir_wp__get_groups_facebook( $id = 'me' )
     {
         try {
+
+            $facebook_options = get_option( COMPARTIR_WP__OPTIONS_FACEBOOK );
+
+            if ( isset( $facebook_options['app_id'], $facebook_options['app_secret'], $facebook_options['long_access_token'] ) )
             $response_body_decode = compartir_wp__get_fan_pages_on_facebook_with_keys( $id );
 
             if ( isset( $response_body_decode['data'] )

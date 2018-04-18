@@ -97,16 +97,7 @@ if ( ! function_exists( 'compartir_wp__publish_on_facebook' ) )
             $parameters['source'] = $fb->fileToUpload( $media );
         }
 
-        try {
-            $response = $fb->post( "/{$id}/feed", $parameters, $keys['token'] );
-        } catch ( \Facebook\Exceptions\FacebookResponseException $e ) {
-            echo 'Graph returned an error: ' . $e->getMessage();
-            exit;
-        } catch ( \Facebook\Exceptions\FacebookSDKException $e ) {
-            echo 'Facebook SDK returned an error: ' . $e->getMessage();
-            exit;
-        }
-
+        $response = $fb->post( "/{$id}/feed", $parameters, $keys['token'] );
         return $response->getGraphNode();
     }
 }
@@ -189,18 +180,7 @@ if ( ! function_exists( 'compartir_wp__facebook_batch_request' ) )
             }
         }
 
-        try {
-            $responses = $fb->sendBatchRequest($batch);
-        } catch( \Facebook\Exceptions\FacebookResponseException $e ) {
-            // When Graph returns an error
-            echo 'Graph returned an error: ' . $e->getMessage();
-            exit;
-        } catch( \Facebook\Exceptions\FacebookSDKException $e ) {
-            // When validation fails or other local issues
-            echo 'Facebook SDK returned an error: ' . $e->getMessage();
-            exit;
-        }
-
+        $responses = $fb->sendBatchRequest( $batch );
         return $responses->getDecodedBody();
     }
 }
