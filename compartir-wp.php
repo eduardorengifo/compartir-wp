@@ -39,5 +39,8 @@ require_once( COMPARTIR_WP__PLUGIN_DIR . 'inc/utils.php' );
 // Adding share helpers
 require_once( COMPARTIR_WP__PLUGIN_DIR . 'inc/share.php' );
 
+// Adding accounts helpers
+require_once( COMPARTIR_WP__PLUGIN_DIR . 'inc/accounts.php' );
+
 // Adding admin page of settings
 require_once( COMPARTIR_WP__PLUGIN_DIR . 'admin/admin.php' );
