@@ -131,3 +131,39 @@ if ( ! function_exists( 'compartir_wp__valid_url' ) )
 }
 
 // ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__get_groups_facebook' ) )
+{
+    /**
+     * Get Groups Facebook
+     *
+     * @param string $id
+     *
+     * @return array|bool|null
+     */
+    function compartir_wp__get_groups_facebook( $id = 'me' )
+    {
+        try {
+            $response_body_decode = compartir_wp__get_fan_pages_on_facebook_with_keys( $id );
+
+            if ( isset( $response_body_decode['data'] )
+                && ! empty( $response_body_decode['data'] ) ) {
+
+                return array_map( function ( $item ) {
+                    return array(
+                        'id'            => $item['id'],
+                        'name'          => $item['name'],
+                        'text'          => $item['name'],
+                        'access_token'  => $item['access_token']
+                    );
+                }, $response_body_decode['data'] );
+            }
+
+            return null;
+        } catch ( Exception $e ) {
+            return false;
+        }
+    }
+}
+
+// ----------------------------------------------------------------------------------
