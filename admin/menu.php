@@ -114,6 +114,7 @@ if ( ! function_exists( 'compartir_wp__admin_form_html' ) )
      * Admin form html
      *
      * @return void
+     * @throws \Facebook\Exceptions\FacebookSDKException
      */
     function compartir_wp__admin_form_html()
     {
@@ -166,7 +167,8 @@ if ( ! function_exists( 'compartir_wp__admin_sidebar' ) )
     function compartir_wp__admin_sidebar()
     {
         $html = sprintf( '<h2><span>%s</span></h2>',
-            esc_attr__( 'Sidebar Content Header', COMPARTIR_WP__TEXT_DOMAIN ) );
+            esc_html__( 'Sidebar Content Header', COMPARTIR_WP__TEXT_DOMAIN )
+        );
 
         $html .= sprintf( '<div class="inside"><p>%s</p></div><!-- .inside -->',
             'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' );
@@ -185,6 +187,7 @@ if ( ! function_exists( 'compartir_wp__options_page_html' ) )
      * @link https://codex.wordpress.org/Creating_Options_Pages
      *
      * @return void
+     * @throws \Facebook\Exceptions\FacebookSDKException
      */
     function compartir_wp__options_page_html() {
         // check user capabilities
