@@ -128,7 +128,7 @@ if ( ! function_exists( 'compartir_wp__share_fast_publisher' ) )
         }
 
         if ( isset( $general_options['share_on_facebook'] )
-            && $general_options['share_on_facebook'] === 'on' ) {
+            && ! empty( $general_options['share_on_facebook'] ) ) {
 
             compartir_wp__share_on_facebook( $options_form['message'], $link );
         }
