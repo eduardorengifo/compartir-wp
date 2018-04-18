@@ -140,3 +140,95 @@ if ( ! function_exists( 'compartir_wp__publish_on_facebook_with_keys' ) )
 }
 
 // ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__facebook_batch_request' ) )
+{
+    /**
+     * Facebook Batch Request
+     *
+     * @param array $keys
+     * @param array $requests
+     *
+     * @return array
+     * @throws \Facebook\Exceptions\FacebookSDKException
+     */
+    function compartir_wp__facebook_batch_request( $keys, $requests )
+    {
+        require_once( COMPARTIR_WP__PLUGIN_DIR . 'vendor/autoload.php' );
+
+        $fb = new \Facebook\Facebook([
+            'app_id'                => $keys['app_id'],
+            'app_secret'            => $keys['app_secret'],
+            'default_graph_version' => 'v2.12',
+        ]);
+
+        $fb->setDefaultAccessToken( $keys['token'] );
+
+        $batch = array();
+
+        if ( isset( $requests )
+            && ! empty( $requests )
+            && is_array( $requests ) ) {
+
+            foreach ( $requests as $request ) {
+
+                $id = $request['id'];
+                $token = $request['token'];
+                $parameters = $request['parameters'];
+                $media = $request['media'];
+                $method = $request['method'];
+
+                if ( isset( $media )
+                    && ! empty( $media )
+                    && is_string( $media ) ) {
+
+                    $parameters['source'] = $fb->fileToUpload( $media );
+                }
+
+                $batch["post-to-feed-{$id}"] = $fb->request( $method, "/{$id}/feed", $parameters, $token );
+            }
+        }
+
+        try {
+            $responses = $fb->sendBatchRequest($batch);
+        } catch( \Facebook\Exceptions\FacebookResponseException $e ) {
+            // When Graph returns an error
+            echo 'Graph returned an error: ' . $e->getMessage();
+            exit;
+        } catch( \Facebook\Exceptions\FacebookSDKException $e ) {
+            // When validation fails or other local issues
+            echo 'Facebook SDK returned an error: ' . $e->getMessage();
+            exit;
+        }
+
+        return $responses->getDecodedBody();
+    }
+}
+
+// ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__facebook_batch_request_with_keys' ) )
+{
+    /**
+     * Facebook Batch Request with Keys
+     *
+     * @param array $requests
+     *
+     * @return array
+     * @throws \Facebook\Exceptions\FacebookSDKException
+     */
+    function compartir_wp__facebook_batch_request_with_keys( $requests )
+    {
+        $facebook_options = get_option( COMPARTIR_WP__OPTIONS_FACEBOOK );
+
+        $keys = array(
+            'app_id'        => $facebook_options['app_id'],
+            'app_secret'    => $facebook_options['app_secret'],
+            'token'         => $facebook_options['long_access_token']
+        );
+
+        return compartir_wp__facebook_batch_request( $keys, $requests );
+    }
+}
+
+// ----------------------------------------------------------------------------------
