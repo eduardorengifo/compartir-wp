@@ -67,14 +67,10 @@ if ( ! function_exists( 'compartir_wp__share_post_on_twitter' ) )
      */
     function compartir_wp__share_post_on_twitter( $post )
     {
-        $media = null;
+        $link = get_the_permalink( $post->ID );
+        $message = "{$post->post_title} {$link}";
 
-        if ( has_post_thumbnail( $post ) ) {
-            $attached_file = get_attached_file( get_post_thumbnail_id( $post ) );
-            $media = array( $attached_file );
-        }
-
-        return compartir_wp__share_on_twitter( $post->post_title, $media );
+        return compartir_wp__share_on_twitter( $message );
     }
 }
 
