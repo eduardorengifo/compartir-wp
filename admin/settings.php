@@ -158,7 +158,8 @@ if ( ! function_exists( 'compartir_wp__register_facebook_settings' ) )
             'multi_checkbox',
             $page,
             array(
-                'description'   => __( 'Add the ID of each Fan Page where you are the administrator separated by commas. Example: xxxxxxxx, yyyyyyyy, zzzzzzzz', COMPARTIR_WP__TEXT_DOMAIN ),
+                'items'         => compartir_wp__get_groups_facebook(),
+                'description'   => __( 'Add the ID of each Fan Page where you are the administrator.', COMPARTIR_WP__TEXT_DOMAIN ),
                 'error'         => __( 'Error', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
@@ -170,7 +171,7 @@ if ( ! function_exists( 'compartir_wp__register_facebook_settings' ) )
             'multi_checkbox',
             $page,
             array(
-                'description'   => __( 'Add the ID of each group where you are the administrator separated by commas. Example: xxxxxxxx, yyyyyyyy, zzzzzzzz', COMPARTIR_WP__TEXT_DOMAIN ),
+                'description'   => __( 'Add the ID of each group where you are the administrator.', COMPARTIR_WP__TEXT_DOMAIN ),
                 'error'         => __( 'Error', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
