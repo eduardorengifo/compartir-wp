@@ -23,7 +23,7 @@ if ( ! function_exists( 'compartir_wp__share_post' ) )
         }
 
         if ( isset( $general_options['share_on_facebook'] )
-            && $general_options['share_on_facebook'] === 'on' ) {
+            && ! empty( $general_options['share_on_facebook'] ) ) {
 
             compartir_wp__share_post_on_facebook( $post );
         }
@@ -101,6 +101,18 @@ if ( ! function_exists( 'compartir_wp__share_on_facebook' ) )
 
             compartir_wp__share_on_facebook_by_user( $message, $link, $media );
         }
+
+        if ( isset( $general_options['share_on_facebook']['fanpages'] )
+            && $general_options['share_on_facebook']['fanpages'] === 'on' ) {
+
+            compartir_wp__share_on_facebook_in_fan_pages( $message, $link, $media );
+        }
+
+        if ( isset( $general_options['share_on_facebook']['groups'] )
+            && $general_options['share_on_facebook']['groups'] === 'on' ) {
+
+            compartir_wp__share_on_facebook_in_groups( $message, $link, $media );
+        }
     }
 }
 
@@ -147,6 +159,100 @@ if ( ! function_exists( 'compartir_wp__share_on_facebook_by_user' ) )
         }
 
         return compartir_wp__publish_on_facebook_with_keys( 'me', $parameters, $media );
+    }
+}
+
+// ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__share_on_facebook_in_fan_pages' ) )
+{
+    /**
+     * Share on Facebook in Fan Pages
+     *
+     * @param string $message
+     * @param null|string $link
+     * @param null|string $media
+     *
+     * @return void
+     * @throws \Facebook\Exceptions\FacebookSDKException
+     */
+    function compartir_wp__share_on_facebook_in_fan_pages( $message, $link = null, $media = null )
+    {
+        require_once( COMPARTIR_WP__PLUGIN_DIR . 'vendor/autoload.php' );
+
+        $facebook_options = get_option( COMPARTIR_WP__OPTIONS_FACEBOOK );
+
+        $requests = array();
+
+        if ( isset( $facebook_options['fan_pages'] )
+            && ! empty( $facebook_options['fan_pages'] )
+            && is_array( $facebook_options['fan_pages'] ) ) {
+
+            foreach ( $facebook_options['fan_pages'] as $fan_page_id => $status ) {
+
+                if ( $status == 'on' ) {
+
+
+                    $items = compartir_wp__get_groups_facebook();
+
+                    if (isset($items)
+                        && !empty($items)
+                        && is_array($items)) {
+
+                        foreach ($items as $item) {
+
+                            if ($fan_page_id == $item['id']) {
+
+                                $request = array(
+                                    'method'        => 'POST',
+                                    'id'            => $item['id'],
+                                    'token'         => $item['access_token'],
+                                    'parameters'    => array(
+                                        'message'   => $message
+                                    )
+                                );
+
+                                if (isset($link)
+                                    && !empty($link)
+                                    && compartir_wp__valid_url($link)) {
+
+                                    $request['parameters']['link'] = $link;
+                                }
+
+                                $requests[] = $request;
+                            }
+                        }
+                    }
+                }
+
+
+            }
+        }
+
+        if ( ! empty( $requests )
+            && is_array( $requests ) ) {
+
+            compartir_wp__facebook_batch_request_with_keys( $requests );
+        }
+    }
+}
+
+// ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__share_on_facebook_in_groups' ) )
+{
+    /**
+     * Share on Facebook in Groups
+     *
+     * @param string $message
+     * @param null|string $link
+     * @param null|string $media
+     *
+     * @return void
+     */
+    function compartir_wp__share_on_facebook_in_groups( $message, $link = null, $media = null )
+    {
+        // TODO: Finish as soon as facebook approves access to groups
     }
 }
 
