@@ -123,7 +123,7 @@ if ( ! function_exists( 'compartir_wp__register_facebook_settings' ) )
             $page,
             array(
                 'text'          => __( 'Required', COMPARTIR_WP__TEXT_DOMAIN ),
-                'description'   => __( 'You can get it in the configuration of your facebook application. <a href="https://developers.facebook.com/apps" target="_blank">Link</a>', COMPARTIR_WP__TEXT_DOMAIN )
+                'description'   => __( 'You can get it in the configuration of your <a href="https://developers.facebook.com/apps" target="_blank">facebook application</a>.', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
 
@@ -135,7 +135,7 @@ if ( ! function_exists( 'compartir_wp__register_facebook_settings' ) )
             $page,
             array(
                 'text'          => __( 'Required', COMPARTIR_WP__TEXT_DOMAIN ),
-                'description'   => __( 'You can get it in the configuration of your facebook application. <a href="https://developers.facebook.com/apps" target="_blank">Link</a>', COMPARTIR_WP__TEXT_DOMAIN )
+                'description'   => __( 'You can get it in the configuration of your <a href="https://developers.facebook.com/apps" target="_blank">facebook application</a>.', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
 
@@ -147,7 +147,7 @@ if ( ! function_exists( 'compartir_wp__register_facebook_settings' ) )
             $page,
             array(
                 'text'          => __( 'Required', COMPARTIR_WP__TEXT_DOMAIN ),
-                'description'   => __( 'Use the tools of facebook. <a href="https://developers.facebook.com/tools/explorer/" target="_blank">Link</a>', COMPARTIR_WP__TEXT_DOMAIN )
+                'description'   => __( 'Use the <a href="https://developers.facebook.com/tools-and-support/" target="_blank">tools of facebook</a>.', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
 
@@ -159,8 +159,8 @@ if ( ! function_exists( 'compartir_wp__register_facebook_settings' ) )
             $page,
             array(
                 'items'         => compartir_wp__get_groups_facebook(),
-                'description'   => __( 'Add the ID of each Fan Page where you are the administrator.', COMPARTIR_WP__TEXT_DOMAIN ),
-                'error'         => __( 'Error', COMPARTIR_WP__TEXT_DOMAIN )
+                'description'   => __( 'Select each fan page where you are the administrator to share the content.', COMPARTIR_WP__TEXT_DOMAIN ),
+                'error'         => __( 'Possibly does not have fan pages or has not yet placed the credentials of your facebook application.', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
 
@@ -171,8 +171,8 @@ if ( ! function_exists( 'compartir_wp__register_facebook_settings' ) )
             'multi_checkbox',
             $page,
             array(
-                'description'   => __( 'Add the ID of each group where you are the administrator.', COMPARTIR_WP__TEXT_DOMAIN ),
-                'error'         => __( 'Error', COMPARTIR_WP__TEXT_DOMAIN )
+                'description'   => __( 'Select each group where you are the administrator to share the content.', COMPARTIR_WP__TEXT_DOMAIN ),
+                'error'         => __( '<b><em>As of April 4, 2018</em></b>, all applications, including those that have been previously approved, must undergo the review process in order to access <b>the Event API</b>, <b>the Groups API</b>, and <b>the Page API</b>. Applications that now have access to the API of events and the API of groups will no longer be able to access them and will have to undergo <a href="https://developers.facebook.com/docs/apps/review" target="_blank">revision</a> once this is back in operation. In the case of applications that use the page API, they must be reviewed once the procedure is available again or they will lose access to the API.', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
     }
@@ -209,7 +209,7 @@ if ( ! function_exists('compartir_wp__register_twitter_settings') )
             $page,
             array(
                 'text'          => __( 'Required', COMPARTIR_WP__TEXT_DOMAIN ),
-                'description'   => __( 'Create your twitter application and get the keys. <a href="https://apps.twitter.com/app/" target="_blank">Link</a>', COMPARTIR_WP__TEXT_DOMAIN )
+                'description'   => __( 'Create your <a href="https://apps.twitter.com/app/" target="_blank">twitter application</a> and get the keys.', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
 
@@ -221,7 +221,7 @@ if ( ! function_exists('compartir_wp__register_twitter_settings') )
             $page,
             array(
                 'text'          => __( 'Required', COMPARTIR_WP__TEXT_DOMAIN ),
-                'description'   => __( 'Create your twitter application and get the keys. <a href="https://apps.twitter.com/app/" target="_blank">Link</a>', COMPARTIR_WP__TEXT_DOMAIN )
+                'description'   => __( 'Create your <a href="https://apps.twitter.com/app/" target="_blank">twitter application</a> and get the keys.', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
 
@@ -233,7 +233,7 @@ if ( ! function_exists('compartir_wp__register_twitter_settings') )
             $page,
             array(
                 'text'          => __( 'Required', COMPARTIR_WP__TEXT_DOMAIN ),
-                'description'   => __( 'Create your twitter application and get the keys. <a href="https://apps.twitter.com/app/" target="_blank">Link</a>', COMPARTIR_WP__TEXT_DOMAIN )
+                'description'   => __( 'Create your <a href="https://apps.twitter.com/app/" target="_blank">twitter application</a> and get the keys.', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
 
@@ -245,7 +245,7 @@ if ( ! function_exists('compartir_wp__register_twitter_settings') )
             $page,
             array(
                 'text'          => __( 'Required', COMPARTIR_WP__TEXT_DOMAIN ),
-                'description'   => __( 'Create your twitter application and get the keys. <a href="https://apps.twitter.com/app/" target="_blank">Link</a>', COMPARTIR_WP__TEXT_DOMAIN )
+                'description'   => __( 'Create your <a href="https://apps.twitter.com/app/" target="_blank">twitter application</a> and get the keys.', COMPARTIR_WP__TEXT_DOMAIN )
             )
         );
     }
