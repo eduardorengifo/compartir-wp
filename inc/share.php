@@ -68,7 +68,8 @@ if ( ! function_exists( 'compartir_wp__share_post_on_twitter' ) )
     function compartir_wp__share_post_on_twitter( $post )
     {
         $link = get_the_permalink( $post->ID );
-        $message = "{$post->post_title} {$link}";
+        $tags = compartir_wp__get_post_hashtags_by_tags( $post->ID );
+        $message = "{$tags} {$link}";
 
         return compartir_wp__share_on_twitter( $message );
     }
@@ -126,7 +127,10 @@ if ( ! function_exists( 'compartir_wp__share_post_on_facebook' ) )
      */
     function compartir_wp__share_post_on_facebook( $post )
     {
-        compartir_wp__share_on_facebook( $post->post_title, get_the_permalink( $post->ID ) );
+
+        $message = compartir_wp__get_post_hashtags_by_tags( $post->ID );
+
+        compartir_wp__share_on_facebook( $message, get_the_permalink( $post->ID ) );
     }
 }
 

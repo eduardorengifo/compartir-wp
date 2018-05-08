@@ -213,3 +213,41 @@ if ( ! function_exists( 'compartir_wp__get_groups_facebook' ) )
 }
 
 // ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__get_post_hashtags_by_tags' ) )
+{
+    /**
+     * Get post hashtags by tags
+     *
+     * @param int $post_id
+     *
+     * @return null|string
+     */
+    function compartir_wp__get_post_hashtags_by_tags( $post_id = 0 )
+    {
+        $tags_list = wp_get_post_tags( $post_id, array( 'fields' => 'names' ) );
+
+        if ( ! empty( $tags_list ) && is_array( $tags_list ) ) {
+
+            $tags_list = array_map( function ( $tag ) {
+                $tag = trim( $tag );
+                $tag = sanitize_title( $tag );
+                $tag = str_replace( array( '-', ' ' ), '', $tag );
+                $tag = "#{$tag}";
+
+                return $tag;
+            }, $tags_list );
+
+            if ( ! empty( $tags_list ) && is_array( $tags_list ) )
+            {
+                return implode( ' ', $tags_list );
+            }
+
+            return null;
+        }
+
+        return null;
+    }
+}
+
+// ----------------------------------------------------------------------------------
