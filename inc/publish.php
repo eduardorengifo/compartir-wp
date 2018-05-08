@@ -150,7 +150,7 @@ if ( ! function_exists( 'compartir_wp__facebook_batch_request' ) )
         $fb = new \Facebook\Facebook([
             'app_id'                => $keys['app_id'],
             'app_secret'            => $keys['app_secret'],
-            'default_graph_version' => 'v2.12',
+            'default_graph_version' => 'v3.0',
         ]);
 
         $fb->setDefaultAccessToken( $keys['token'] );
@@ -164,7 +164,7 @@ if ( ! function_exists( 'compartir_wp__facebook_batch_request' ) )
             foreach ( $requests as $request ) {
 
                 $id = $request['id'];
-                $token = $request['token'];
+                $token = ( isset( $request['token'] ) && ! empty( $request['token'] ) ) ? $request['token'] : $keys['token'];
                 $parameters = $request['parameters'];
                 $media = $request['media'];
                 $method = $request['method'];

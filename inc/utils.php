@@ -135,7 +135,7 @@ if ( ! function_exists( 'compartir_wp__valid_url' ) )
 if ( ! function_exists( 'compartir_wp__get_fan_pages_facebook' ) )
 {
     /**
-     * Get Groups Facebook
+     * Get Fans Page Facebook
      *
      * @param string $id
      *
@@ -147,23 +147,65 @@ if ( ! function_exists( 'compartir_wp__get_fan_pages_facebook' ) )
 
             $facebook_options = get_option( COMPARTIR_WP__OPTIONS_FACEBOOK );
 
-            if ( isset( $facebook_options['app_id'], $facebook_options['app_secret'], $facebook_options['long_access_token'] ) )
-            $response_body_decode = compartir_wp__get_fan_pages_on_facebook_with_keys( $id );
+            if ( isset( $facebook_options['app_id'], $facebook_options['app_secret'], $facebook_options['long_access_token'] ) ) {
+                $response_body_decode = compartir_wp__get_fan_pages_on_facebook_with_keys( $id );
 
-            if ( isset( $response_body_decode['data'] )
-                && ! empty( $response_body_decode['data'] ) ) {
+                if ( isset( $response_body_decode['data'] )
+                    && ! empty( $response_body_decode['data'] ) ) {
 
-                return array_map( function ( $item ) {
-                    return array(
-                        'id'            => $item['id'],
-                        'name'          => $item['name'],
-                        'text'          => $item['name'],
-                        'access_token'  => $item['access_token']
-                    );
-                }, $response_body_decode['data'] );
+                    return array_map(function ($item) {
+                        return array(
+                            'id' => $item['id'],
+                            'name' => $item['name'],
+                            'text' => $item['name'],
+                            'access_token' => $item['access_token']
+                        );
+                    }, $response_body_decode['data'] );
+                }
             }
 
             return null;
+        } catch ( Exception $e ) {
+            return false;
+        }
+    }
+}
+
+// ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__get_groups_facebook' ) )
+{
+    /**
+     * Get Groups facebook
+     *
+     * @param string $id
+     *
+     * @return array|bool|null
+     */
+    function compartir_wp__get_groups_facebook( $id = 'me' )
+    {
+        try {
+
+            $facebook_options = get_option( COMPARTIR_WP__OPTIONS_FACEBOOK );
+
+            if ( isset( $facebook_options['app_id'], $facebook_options['app_secret'], $facebook_options['long_access_token'] ) ) {
+                $response_body_decode = compartir_wp__get_groups_on_facebook_with_keys( $id );
+
+                if ( isset( $response_body_decode['data'] )
+                    && ! empty( $response_body_decode['data'] ) ) {
+
+                    return array_map(function ($item) {
+                        return array(
+                            'id' => $item['id'],
+                            'name' => $item['name'],
+                            'text' => $item['name']
+                        );
+                    }, $response_body_decode['data'] );
+                }
+            }
+
+            return null;
+
         } catch ( Exception $e ) {
             return false;
         }

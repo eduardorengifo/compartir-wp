@@ -60,3 +60,62 @@ if ( ! function_exists( 'compartir_wp__get_fan_pages_on_facebook_with_keys' ) )
 }
 
 // ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__get_groups_on_facebook' ) )
+{
+    /**
+     * Get Groups on Facebook
+     *
+     * @param array $keys
+     * @param string $id User id, example: me
+     *
+     * @return array
+     * @throws \Facebook\Exceptions\FacebookSDKException
+     */
+    function compartir_wp__get_groups_on_facebook( $keys, $id )
+    {
+        require_once( COMPARTIR_WP__PLUGIN_DIR . 'vendor/autoload.php' );
+
+        $fb = new Facebook\Facebook([
+            'app_id'                => $keys['app_id'],
+            'app_secret'            => $keys['app_secret'],
+            'default_graph_version' => 'v3.0'
+        ]);
+
+        // Returns a `FacebookFacebookResponse` object
+        $response = $fb->get(
+            "/{$id}/groups",
+            $keys['token']
+        );
+
+        return $response->getDecodedBody();
+    }
+}
+
+// ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__get_groups_on_facebook_with_keys' ) )
+{
+    /**
+     * Get Groups on Facebook with Keys
+     *
+     * @param $id
+     *
+     * @return array
+     * @throws \Facebook\Exceptions\FacebookSDKException
+     */
+    function compartir_wp__get_groups_on_facebook_with_keys( $id )
+    {
+        $facebook_options = get_option( COMPARTIR_WP__OPTIONS_FACEBOOK );
+
+        $keys = array(
+            'app_id'        => $facebook_options['app_id'],
+            'app_secret'    => $facebook_options['app_secret'],
+            'token'         => $facebook_options['long_access_token']
+        );
+
+        return compartir_wp__get_groups_on_facebook( $keys, $id );
+    }
+}
+
+// ----------------------------------------------------------------------------------

@@ -244,11 +244,65 @@ if ( ! function_exists( 'compartir_wp__share_on_facebook_in_groups' ) )
      * @param null|string $link
      * @param null|string $media
      *
-     * @return void
+     * @throws \Facebook\Exceptions\FacebookSDKException
      */
     function compartir_wp__share_on_facebook_in_groups( $message, $link = null, $media = null )
     {
-        // TODO: Finish as soon as facebook approves access to groups
+        require_once( COMPARTIR_WP__PLUGIN_DIR . 'vendor/autoload.php' );
+
+        $facebook_options = get_option( COMPARTIR_WP__OPTIONS_FACEBOOK );
+
+        $requests = array();
+
+        if ( isset( $facebook_options['groups'] )
+            && ! empty( $facebook_options['groups'] )
+            && is_array( $facebook_options['groups'] ) ) {
+
+            foreach ( $facebook_options['groups'] as $group_id => $status ) {
+
+                if ( $status == 'on' ) {
+
+
+                    $items = compartir_wp__get_groups_facebook();
+
+                    if ( isset( $items )
+                        && ! empty( $items )
+                        && is_array( $items ) ) {
+
+                        foreach ( $items as $item ) {
+
+                            if ( $group_id == $item['id'] ) {
+
+                                $request = array(
+                                    'method'        => 'POST',
+                                    'id'            => $item['id'],
+                                    'parameters'    => array(
+                                        'message'   => $message
+                                    )
+                                );
+
+                                if ( isset( $link )
+                                    && ! empty( $link )
+                                    && compartir_wp__valid_url( $link ) ) {
+
+                                    $request['parameters']['link'] = $link;
+                                }
+
+                                $requests[] = $request;
+                            }
+                        }
+                    }
+                }
+
+
+            }
+        }
+
+        if ( ! empty( $requests )
+            && is_array( $requests ) ) {
+
+            compartir_wp__facebook_batch_request_with_keys( $requests );
+        }
     }
 }
 

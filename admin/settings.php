@@ -171,6 +171,7 @@ if ( ! function_exists( 'compartir_wp__register_facebook_settings' ) )
             'multi_checkbox',
             $page,
             array(
+                'items'         => compartir_wp__get_groups_facebook(),
                 'description'   => __( 'Select each group where you are the administrator to share the content.', COMPARTIR_WP__TEXT_DOMAIN ),
                 'error'         => __( '<b><em>As of April 4, 2018</em></b>, all applications, including those that have been previously approved, must undergo the review process in order to access <b>the Event API</b>, <b>the Groups API</b>, and <b>the Page API</b>. Applications that now have access to the API of events and the API of groups will no longer be able to access them and will have to undergo <a href="https://developers.facebook.com/docs/apps/review" target="_blank">revision</a> once this is back in operation. In the case of applications that use the page API, they must be reviewed once the procedure is available again or they will lose access to the API.', COMPARTIR_WP__TEXT_DOMAIN )
             )
