@@ -189,7 +189,7 @@ if ( ! function_exists( 'compartir_wp__share_on_facebook_in_fan_pages' ) )
                 if ( $status == 'on' ) {
 
 
-                    $items = compartir_wp__get_groups_facebook();
+                    $items = compartir_wp__get_fan_pages_facebook();
 
                     if (isset($items)
                         && !empty($items)

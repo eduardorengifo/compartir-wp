@@ -132,7 +132,7 @@ if ( ! function_exists( 'compartir_wp__valid_url' ) )
 
 // ----------------------------------------------------------------------------------
 
-if ( ! function_exists( 'compartir_wp__get_groups_facebook' ) )
+if ( ! function_exists( 'compartir_wp__get_fan_pages_facebook' ) )
 {
     /**
      * Get Groups Facebook
@@ -141,7 +141,7 @@ if ( ! function_exists( 'compartir_wp__get_groups_facebook' ) )
      *
      * @return array|bool|null
      */
-    function compartir_wp__get_groups_facebook( $id = 'me' )
+    function compartir_wp__get_fan_pages_facebook( $id = 'me' )
     {
         try {
 

@@ -158,7 +158,7 @@ if ( ! function_exists( 'compartir_wp__register_facebook_settings' ) )
             'multi_checkbox',
             $page,
             array(
-                'items'         => compartir_wp__get_groups_facebook(),
+                'items'         => compartir_wp__get_fan_pages_facebook(),
                 'description'   => __( 'Select each fan page where you are the administrator to share the content.', COMPARTIR_WP__TEXT_DOMAIN ),
                 'error'         => __( 'Possibly does not have fan pages or has not yet placed the credentials of your facebook application.', COMPARTIR_WP__TEXT_DOMAIN )
             )
