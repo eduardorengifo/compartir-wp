@@ -204,3 +204,34 @@ if ( ! function_exists( 'compartir_wp__admin_notices_fast_publisher' ) )
 add_action( 'admin_notices', 'compartir_wp__admin_notices_fast_publisher' );
 
 // ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__array_to_html' ) )
+{
+    /**
+     * Array to html
+     *
+     * @param array $arr
+     *
+     * @return string|null
+     */
+    function compartir_wp__array_to_html( $arr = array() )
+    {
+        if ( ! isset( $arr ) || empty( $arr ) || ! is_array( $arr ) ) {
+            return null;
+        }
+
+        $links = array_map( function ( $link ) {
+            return sprintf(
+                '<li><a href="%s" target="_blank">%s</a></li>',
+                esc_url( $link['url'] ),
+                esc_html( $link['text'] )
+            );
+        }, $arr );
+
+        $links = implode( ' ', $links );
+
+        return sprintf( '<ul>%s</ul>', $links );
+    }
+}
+
+// ----------------------------------------------------------------------------------

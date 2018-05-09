@@ -166,14 +166,50 @@ if ( ! function_exists( 'compartir_wp__admin_sidebar' ) )
      */
     function compartir_wp__admin_sidebar()
     {
-        $html = sprintf( '<h2><span>%s</span></h2>',
-            esc_html__( 'Sidebar Content Header', COMPARTIR_WP__TEXT_DOMAIN )
+        $html_doc = sprintf(
+            '<h2><span>%s</span></h2>',
+            esc_html__( 'Documentation', COMPARTIR_WP__TEXT_DOMAIN )
         );
 
-        $html .= sprintf( '<div class="inside"><p>%s</p></div><!-- .inside -->',
-            'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' );
+        $links_doc = compartir_wp__array_to_html( array(
+            array(
+                'text'  => esc_html__( '1. Configure your Facebook application', COMPARTIR_WP__TEXT_DOMAIN ),
+                'url'   => '#'
+            ),
+            array(
+                'text'  => esc_html__( '2. Configure your Twitter application', COMPARTIR_WP__TEXT_DOMAIN ),
+                'url'   => '#'
+            ),
+            array(
+                'text'  => esc_html__( '3. Publish with Compartir WP plugin', COMPARTIR_WP__TEXT_DOMAIN ),
+                'url'   => '#'
+            )
+        ) );
 
-        printf( '<div class="postbox">%s</div><!-- .postbox -->', $html );
+        $html_doc .= sprintf( '<div class="inside">%s</div><!-- .inside -->', $links_doc );
+
+        printf( '<div class="postbox">%s</div><!-- .postbox -->', $html_doc );
+
+
+        $html_shop = sprintf(
+            '<h2><span>%s</span></h2>',
+            esc_html__( 'Desarrolla.tech', COMPARTIR_WP__TEXT_DOMAIN )
+        );
+
+        $links_shop = compartir_wp__array_to_html( array(
+            array(
+                'text'  => esc_html__( 'Shop', COMPARTIR_WP__TEXT_DOMAIN ),
+                'url'   => 'https://shop.desarrolla.tech'
+            ),
+            array(
+                'text'  => esc_html__( 'Compartir WP in store', COMPARTIR_WP__TEXT_DOMAIN ),
+                'url'   => 'https://shop.desarrolla.tech/item/compartir-wp/'
+            )
+        ) );
+
+        $html_shop .= sprintf( '<div class="inside">%s</div><!-- .inside -->', $links_shop );
+
+        printf( '<div class="postbox">%s</div><!-- .postbox -->', $html_shop );
     }
 }
 
