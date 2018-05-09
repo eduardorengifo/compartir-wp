@@ -174,15 +174,15 @@ if ( ! function_exists( 'compartir_wp__admin_sidebar' ) )
         $links_doc = compartir_wp__array_to_html( array(
             array(
                 'text'  => esc_html__( '1. Configure your Facebook application', COMPARTIR_WP__TEXT_DOMAIN ),
-                'url'   => '#'
+                'url'   => 'https://www.youtube.com/watch?v=tln-lLSrpdY'
             ),
             array(
                 'text'  => esc_html__( '2. Configure your Twitter application', COMPARTIR_WP__TEXT_DOMAIN ),
-                'url'   => '#'
+                'url'   => 'https://www.youtube.com/watch?v=OVBQz5Por1w'
             ),
             array(
                 'text'  => esc_html__( '3. Publish with Compartir WP plugin', COMPARTIR_WP__TEXT_DOMAIN ),
-                'url'   => '#'
+                'url'   => 'https://www.youtube.com/watch?v=Ycmsx1dBQJg'
             )
         ) );
 
