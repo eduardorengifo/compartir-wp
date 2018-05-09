@@ -136,3 +136,71 @@ if ( ! function_exists( 'compartir_wp__share_fast_publisher' ) )
 }
 
 // ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__admin_notices' ) )
+{
+    /**
+     * Admin Notices
+     *
+     * @param string $message
+     * @param string $class
+     * @param true $dismissible
+     *
+     * @return void
+     */
+    function compartir_wp__admin_notices( $message, $class = 'success', $dismissible = true )
+    {
+        $html = sprintf( '<p>%s</p>', $message );
+        $container = '<div class="notice notice-%s">%s</div>';
+
+        if ( $dismissible ) {
+            $html .= sprintf(
+                '<button type="button" class="notice-dismiss"><span class="screen-reader-text">%s</span></button>',
+                esc_html__('Dismiss this notice.', COMPARTIR_WP__TEXT_DOMAIN)
+            );
+
+            $container = '<div class="notice notice-%s is-dismissible">%s</div>';
+        }
+
+        printf( $container, $class, $html );
+    }
+}
+
+// ----------------------------------------------------------------------------------
+
+if ( ! function_exists( 'compartir_wp__admin_notices_fast_publisher' ) )
+{
+    /**
+     * Admin notices fast publisher
+     *
+     * @return void
+     */
+    function compartir_wp__admin_notices_fast_publisher()
+    {
+        if ( isset( $_POST['compartir_wp__options_fast-publisher']['message'] )
+            && ! empty( $_POST['compartir_wp__options_fast-publisher']['message'] ) ) {
+
+            $message = sprintf(
+                '<strong>%s</strong>',
+                esc_html__( 'Sent.', COMPARTIR_WP__TEXT_DOMAIN )
+            );
+
+            compartir_wp__admin_notices( $message, 'success' );
+
+        } elseif ( isset( $_POST['compartir_wp__options_fast-publisher']['message'] )
+            && empty( $_POST['compartir_wp__options_fast-publisher']['message'] ) ) {
+
+            $message = sprintf(
+                '<strong>%s</strong>',
+                esc_html__( 'Please complete the message field.', COMPARTIR_WP__TEXT_DOMAIN )
+            );
+
+            compartir_wp__admin_notices( $message, 'warning' );
+
+        }
+    }
+}
+
+add_action( 'admin_notices', 'compartir_wp__admin_notices_fast_publisher' );
+
+// ----------------------------------------------------------------------------------
