@@ -1,10 +1,11 @@
 # Copyright (C) 2018 Compartir WP
 # This file is distributed under the GNU General Public License v2 or later.
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Compartir WP 1.0.0\n"
 "Report-Msgid-Bugs-To: Desarrolla.tech <translations@desarrolla.tech>\n"
-"POT-Creation-Date: 2018-04-18 10:34-0500\n"
+"POT-Creation-Date: 2018-05-08 22:34-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Desarrolla.tech <translations@desarrolla.tech>\n"
@@ -44,8 +45,40 @@ msgstr ""
 msgid "Save Settings"
 msgstr ""
 
-#: admin/menu.php:170
-msgid "Sidebar Content Header"
+#: admin/menu.php:171
+msgid "Documentation"
+msgstr ""
+
+#: admin/menu.php:176
+msgid "1. Configure your Facebook application"
+msgstr ""
+
+#: admin/menu.php:180
+msgid "2. Configure your Twitter application"
+msgstr ""
+
+#: admin/menu.php:184
+msgid "3. Publish with Compartir WP plugin"
+msgstr ""
+
+#: admin/menu.php:196
+msgid "Desarrolla.tech"
+msgstr ""
+
+#: admin/menu.php:201
+msgid "Shop"
+msgstr ""
+
+#: admin/menu.php:205
+msgid "Compartir WP in store"
+msgstr ""
+
+#: admin/menu.php:217
+msgid "Credits"
+msgstr ""
+
+#: admin/menu.php:222
+msgid "Oscar254"
 msgstr ""
 
 #: admin/settings.php:43
@@ -93,8 +126,8 @@ msgid "App ID"
 msgstr ""
 
 #: admin/settings.php:125 admin/settings.php:137 admin/settings.php:149
-#: admin/settings.php:211 admin/settings.php:223 admin/settings.php:235
-#: admin/settings.php:247
+#: admin/settings.php:212 admin/settings.php:224 admin/settings.php:236
+#: admin/settings.php:248
 msgid "Required"
 msgstr ""
 
@@ -137,11 +170,11 @@ msgstr ""
 msgid "Groups"
 msgstr ""
 
-#: admin/settings.php:174
+#: admin/settings.php:175
 msgid "Select each group where you are the administrator to share the content."
 msgstr ""
 
-#: admin/settings.php:175
+#: admin/settings.php:176
 msgid ""
 "<b><em>As of April 4, 2018</em></b>, all applications, including those that "
 "have been previously approved, must undergo the review process in order to "
@@ -154,56 +187,72 @@ msgid ""
 "again or they will lose access to the API."
 msgstr ""
 
-#: admin/settings.php:200
+#: admin/settings.php:201
 msgid "Twitter Settings"
 msgstr ""
 
-#: admin/settings.php:207
+#: admin/settings.php:208
 msgid "Access Token"
 msgstr ""
 
-#: admin/settings.php:212 admin/settings.php:224 admin/settings.php:236
-#: admin/settings.php:248
+#: admin/settings.php:213 admin/settings.php:225 admin/settings.php:237
+#: admin/settings.php:249
 msgid ""
 "Create your <a href=\"https://apps.twitter.com/app/\" target=\"_blank"
 "\">twitter application</a> and get the keys."
 msgstr ""
 
-#: admin/settings.php:219
+#: admin/settings.php:220
 msgid "Access Token Secret"
 msgstr ""
 
-#: admin/settings.php:231
+#: admin/settings.php:232
 msgid "Consumer Key"
 msgstr ""
 
-#: admin/settings.php:243
+#: admin/settings.php:244
 msgid "Consumer Secret"
 msgstr ""
 
-#: admin/settings.php:273
+#: admin/settings.php:274
 msgid "Fast Publisher Settings"
 msgstr ""
 
-#: admin/settings.php:280
+#: admin/settings.php:281
 msgid "Message"
 msgstr ""
 
-#: admin/settings.php:284
+#: admin/settings.php:285
 msgid ""
 "Here you can write the message you want to share on your social networks. "
 "Required*"
 msgstr ""
 
-#: admin/settings.php:291
+#: admin/settings.php:292
 msgid "Link"
 msgstr ""
 
-#: admin/settings.php:295
+#: admin/settings.php:296
 msgid "Optional"
 msgstr ""
 
-#: admin/settings.php:296
+#: admin/settings.php:297
 msgid ""
 "If you want to add a link with the message, you can place one in this field."
+msgstr ""
+
+#: admin/utils.php:159
+msgid "Dismiss this notice."
+msgstr ""
+
+#: admin/utils.php:185
+msgid "Sent."
+msgstr ""
+
+#: admin/utils.php:195
+msgid "Please complete the message field."
+msgstr ""
+
+#: inc/utils.php:114
+msgid "Fast Publisher"
 msgstr ""

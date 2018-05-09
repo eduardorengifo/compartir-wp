@@ -210,6 +210,23 @@ if ( ! function_exists( 'compartir_wp__admin_sidebar' ) )
         $html_shop .= sprintf( '<div class="inside">%s</div><!-- .inside -->', $links_shop );
 
         printf( '<div class="postbox">%s</div><!-- .postbox -->', $html_shop );
+
+
+        $html_credits = sprintf(
+            '<h2><span>%s</span></h2>',
+            esc_html__( 'Credits', COMPARTIR_WP__TEXT_DOMAIN )
+        );
+
+        $links_credits = compartir_wp__array_to_html( array(
+            array(
+                'text'  => esc_html__( 'Oscar254', COMPARTIR_WP__TEXT_DOMAIN ),
+                'url'   => 'https://forobeta.com/member.php?u=110585'
+            )
+        ) );
+
+        $html_credits .= sprintf( '<div class="inside">%s</div><!-- .inside -->', $links_credits );
+
+        printf( '<div class="postbox">%s</div>', $html_credits );
     }
 }
 

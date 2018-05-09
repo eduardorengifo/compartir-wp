@@ -4,9 +4,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Compartir WP 1.0.0\n"
 "Report-Msgid-Bugs-To: Desarrolla.tech <translations@desarrolla.tech>\n"
-"POT-Creation-Date: 2018-04-18 10:34-0500\n"
+"POT-Creation-Date: 2018-05-08 22:34-0500\n"
 "PO-Revision-Date: \n"
+"Last-Translator: \n"
 "Language-Team: Desarrolla.tech <translations@desarrolla.tech>\n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,8 +20,6 @@ msgstr ""
 "_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
 "X-Poedit-Basepath: .\n"
 "X-Generator: Poedit 2.0.4\n"
-"Last-Translator: \n"
-"Language: es_ES\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: vendor\n"
 "X-Poedit-SearchPathExcluded-1: languages\n"
@@ -44,9 +44,41 @@ msgstr "Publicar"
 msgid "Save Settings"
 msgstr "Guardar ajustes"
 
-#: admin/menu.php:170
-msgid "Sidebar Content Header"
-msgstr "Encabezado de contenido de la barra lateral"
+#: admin/menu.php:171
+msgid "Documentation"
+msgstr "Documentación"
+
+#: admin/menu.php:176
+msgid "1. Configure your Facebook application"
+msgstr "1. Configura tu aplicación de Facebook"
+
+#: admin/menu.php:180
+msgid "2. Configure your Twitter application"
+msgstr "2. Configura tu aplicación de Twitter"
+
+#: admin/menu.php:184
+msgid "3. Publish with Compartir WP plugin"
+msgstr "3. Publicar con Compartir WP plugin"
+
+#: admin/menu.php:196
+msgid "Desarrolla.tech"
+msgstr ""
+
+#: admin/menu.php:201
+msgid "Shop"
+msgstr "Tienda"
+
+#: admin/menu.php:205
+msgid "Compartir WP in store"
+msgstr "Compartir WP en la tienda"
+
+#: admin/menu.php:217
+msgid "Credits"
+msgstr "Créditos"
+
+#: admin/menu.php:222
+msgid "Oscar254"
+msgstr ""
 
 #: admin/settings.php:43
 msgid "General Settings"
@@ -87,15 +119,15 @@ msgstr "Permite que el plugin comparta el contenido en Twitter."
 
 #: admin/settings.php:114
 msgid "Facebook Settings"
-msgstr "Configuraciones de Facebook"
+msgstr "Configuración de Facebook"
 
 #: admin/settings.php:121
 msgid "App ID"
-msgstr "App ID"
+msgstr ""
 
 #: admin/settings.php:125 admin/settings.php:137 admin/settings.php:149
-#: admin/settings.php:211 admin/settings.php:223 admin/settings.php:235
-#: admin/settings.php:247
+#: admin/settings.php:212 admin/settings.php:224 admin/settings.php:236
+#: admin/settings.php:248
 msgid "Required"
 msgstr "Necesario"
 
@@ -105,11 +137,11 @@ msgid ""
 "facebook.com/apps\" target=\"_blank\">facebook application</a>."
 msgstr ""
 "Puede obtenerlo en la configuración de su <a href=\"https://developers."
-"facebook.com/apps\" target=\"_blank\">aplicación de Facebook.</a>."
+"facebook.com/apps\" target=\"_blank\">aplicación de Facebook</a>."
 
 #: admin/settings.php:133
 msgid "App Secret"
-msgstr "App Secret"
+msgstr ""
 
 #: admin/settings.php:145
 msgid "Long Access Token"
@@ -131,7 +163,7 @@ msgstr "Páginas de fans"
 msgid ""
 "Select each fan page where you are the administrator to share the content."
 msgstr ""
-"Seleccione cada página de fan en la que usted es el administrador para "
+"Selecciona cada página de fans en la que seas el administrador para "
 "compartir el contenido."
 
 #: admin/settings.php:163
@@ -146,13 +178,13 @@ msgstr ""
 msgid "Groups"
 msgstr "Grupos"
 
-#: admin/settings.php:174
+#: admin/settings.php:175
 msgid "Select each group where you are the administrator to share the content."
 msgstr ""
 "Seleccione cada grupo donde usted es el administrador para compartir el "
 "contenido."
 
-#: admin/settings.php:175
+#: admin/settings.php:176
 msgid ""
 "<b><em>As of April 4, 2018</em></b>, all applications, including those that "
 "have been previously approved, must undergo the review process in order to "
@@ -175,16 +207,16 @@ msgstr ""
 "deben revisarse una vez que el procedimiento esté disponible nuevamente o "
 "perderán el acceso a la API."
 
-#: admin/settings.php:200
+#: admin/settings.php:201
 msgid "Twitter Settings"
 msgstr "Configuración de Twitter"
 
-#: admin/settings.php:207
+#: admin/settings.php:208
 msgid "Access Token"
 msgstr "Token de acceso"
 
-#: admin/settings.php:212 admin/settings.php:224 admin/settings.php:236
-#: admin/settings.php:248
+#: admin/settings.php:213 admin/settings.php:225 admin/settings.php:237
+#: admin/settings.php:249
 msgid ""
 "Create your <a href=\"https://apps.twitter.com/app/\" target=\"_blank"
 "\">twitter application</a> and get the keys."
@@ -192,27 +224,27 @@ msgstr ""
 "Crea tu <a href=\"https://apps.twitter.com/app/\" target=\"_blank"
 "\">aplicación de Twitter</a> y obtén las claves."
 
-#: admin/settings.php:219
+#: admin/settings.php:220
 msgid "Access Token Secret"
-msgstr "Access Token Secret"
+msgstr "Acceso Token Secreto"
 
-#: admin/settings.php:231
+#: admin/settings.php:232
 msgid "Consumer Key"
-msgstr "Consumer Key"
+msgstr ""
 
-#: admin/settings.php:243
+#: admin/settings.php:244
 msgid "Consumer Secret"
-msgstr "Consumer Secret"
+msgstr ""
 
-#: admin/settings.php:273
+#: admin/settings.php:274
 msgid "Fast Publisher Settings"
 msgstr "Configuración rápida del editor"
 
-#: admin/settings.php:280
+#: admin/settings.php:281
 msgid "Message"
 msgstr "Mensaje"
 
-#: admin/settings.php:284
+#: admin/settings.php:285
 msgid ""
 "Here you can write the message you want to share on your social networks. "
 "Required*"
@@ -220,16 +252,32 @@ msgstr ""
 "Aquí puede escribir el mensaje que desea compartir en sus redes sociales. "
 "Necesario*"
 
-#: admin/settings.php:291
+#: admin/settings.php:292
 msgid "Link"
 msgstr "Enlace"
 
-#: admin/settings.php:295
+#: admin/settings.php:296
 msgid "Optional"
 msgstr "Opcional"
 
-#: admin/settings.php:296
+#: admin/settings.php:297
 msgid ""
 "If you want to add a link with the message, you can place one in this field."
 msgstr ""
 "Si desea agregar un enlace con el mensaje, puede colocar uno en este campo."
+
+#: admin/utils.php:159
+msgid "Dismiss this notice."
+msgstr "Descartar este aviso."
+
+#: admin/utils.php:185
+msgid "Sent."
+msgstr "Enviado."
+
+#: admin/utils.php:195
+msgid "Please complete the message field."
+msgstr "Por favor, complete el campo del mensaje."
+
+#: inc/utils.php:114
+msgid "Fast Publisher"
+msgstr "Publicación rápida"
